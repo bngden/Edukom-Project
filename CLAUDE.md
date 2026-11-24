@@ -1,0 +1,68 @@
+# SIM-Edukom — Panduan untuk Agent
+
+SIM-Edukom adalah ERP untuk CV Edukom Jaya Abadi (layanan pembelajaran TIK di SD mitra).
+Peran: Owner, Admin, Tentor, Kurir, Teknisi. Pengembangan saat ini: **irisan role Owner**, backend dulu
+(Laravel, API JSON `/api/v1`), lalu frontend React di repo yang sama dengan desain dari Stitch.
+
+## Peta dokumen
+
+| File | Isi | Boleh diubah agent? |
+|---|---|---|
+| `CLAUDE.md` | Panduan ini | Hanya menambah bagian yang diminta task (misal "Perintah", "Hak akses", "Data berversi") |
+| `docs/tasks/T*.md` | Satu task per file: konteks, aturan bisnis, endpoint, test wajib, DoD | **Tidak** |
+| `docs/TASK_OWNER.md` | Rencana lengkap: keputusan teknis, peta fitur, hasil review Stitch (bagian 4), semua task | **Tidak** |
+| `docs/srs/SRS_Edukom_Revisi.md` | SRS terbaru (kebutuhan per peran: OW, AD, TN, KR, TK, KU) | **Tidak** |
+| `docs/srs/SRS_Edukom_Lama.md` | SRS lama per modul (ADM, IZN, PAY, AST, RPT, SET) — rincian angka/aturan yang hilang di revisi | **Tidak** |
+| `docs/DECISIONS.md` | Keputusan Owner dan default yang dipakai | Tidak (diisi manusia) |
+| `docs/PROGRESS.md` | Status task, asumsi, hal yang perlu dikonfirmasi | **Ya** (wajib diisi di akhir task) |
+| `design/stitch/` | HTML + screenshot dari Stitch MCP (diisi di T2.1) | Ya, hanya di T2.1 |
+
+Urutan prioritas bila ada yang bertentangan: **DECISIONS.md → file task → SRS revisi → SRS lama → desain Stitch**.
+Desain Stitch hanya acuan tampilan, bukan acuan aturan bisnis.
+
+## Cara kerja per task
+
+1. Kerjakan **hanya** task yang diminta (misalnya `docs/tasks/T0.2-hak-akses.md`). Jangan mengerjakan task lain.
+2. Mulai dengan rencana singkat: file yang akan dibuat/diubah, migration, endpoint, dan daftar test. Tunggu persetujuan.
+3. Bila ada hal yang tidak diatur di task, cari di SRS (kode kebutuhan disebut di task). Bila tetap tidak ada,
+   **berhenti dan tanya**, atau ambil asumsi paling sederhana dan catat di laporan. Jangan mengarang fitur.
+4. Selesai bila semua butir Definition of Done terpenuhi, `php artisan test` dan `./vendor/bin/pint --test` lulus.
+5. Perbarui `docs/PROGRESS.md`: status, ringkasan perubahan, asumsi, hal yang perlu dikonfirmasi.
+6. Jangan commit atau push kecuali diminta. Usulkan pesan commit: `feat(T0.2): <ringkasan>`.
+
+## Konvensi kode
+
+- Bahasa kode Inggris (kelas, tabel, kolom, nilai enum snake_case). Label dan pesan ke pengguna bahasa Indonesia.
+- Uang: integer rupiah (`BIGINT UNSIGNED`). Dilarang float untuk uang.
+- Zona waktu `Asia/Jakarta`. Tanggal berlaku bertipe `DATE`; waktu kejadian `DATETIME(6)`.
+- Data induk dan riwayat tidak dihapus; pakai status aktif/nonaktif.
+- Perubahan data penting dicatat lewat `App\Domain\Audit\Audit::record(...)` (tersedia setelah T0.3).
+- Setiap endpoint dilindungi middleware `role` / Policy di server; setiap feature test menguji akses semua role.
+- Validasi lewat FormRequest. Aturan bisnis di `app/Domain/<Konteks>/` (Actions/Services), bukan di Controller.
+- Struktur: `app/Enums`, `app/Domain/<Konteks>`, `app/Http/Controllers/Api/V1`, `app/Http/Requests/Api/V1`,
+  `app/Http/Resources/V1`.
+- Respons API: `{ "data": ... }`, daftar dengan `meta` paginasi; galat `{ "message", "code", "errors" }`
+  (401 UNAUTHENTICATED, 403 FORBIDDEN, 404 NOT_FOUND, 409 CONFLICT, 422 VALIDATION_ERROR, 423 LOCKED).
+- Operasi tulis lintas tabel dibungkus `DB::transaction`.
+- Nilai kebijakan (durasi, toleransi, tarif, batas waktu) tidak di-hardcode; ambil dari `PolicyParameters`
+  / `HonorRates` (tersedia setelah T1.1–T1.3).
+- Migration lama yang sudah dijalankan tidak diubah; buat migration baru.
+- Jangan memasang atau meng-upgrade paket di luar yang disebut task tanpa bertanya.
+
+## Perintah
+
+| Keperluan | Perintah |
+|---|---|
+| Setup lokal | `composer install` → `cp .env.example .env` → `php artisan key:generate` → isi `DB_*` dan `SEED_*` → `php artisan migrate` |
+| Akun bawaan (hanya `APP_ENV=local`) | `php artisan db:seed` → owner@edukom.test, admin@edukom.test (kata sandi dari `SEED_OWNER_PASSWORD` / `SEED_ADMIN_PASSWORD`) |
+| Membuat akun | `php artisan edukom:create-user {role} {email} {name}` (kata sandi interaktif) |
+| Menjalankan test | `php artisan test` (Pest). Filter: `php artisan test --filter=Login` |
+| Database test | Memakai DB dari `.env` (`db_edukom`, MariaDB 11.8 remote). `RefreshDatabase` = `migrate:fresh`, isi DB terhapus tiap test. Tidak ada DB test terpisah. |
+| Format kode | `./vendor/bin/pint --test` (cek), `./vendor/bin/pint` (rapikan) |
+| Tampilan web | `npm install` → `npm run build` (atau `npm run dev`) → `php artisan serve` → `/login`. Desain: skill `.claude/skills/frontend-design` |
+| Dokumentasi API | `php artisan scribe:generate` → `/docs` |
+| Peta kode (graphify) | `python -m graphify query "<pertanyaan>"`; setelah mengubah kode: `python -m graphify update .` |
+
+Catatan:
+- Query harus terparsial: jangan `Model::all()` / `get()` tanpa batas; pakai paginasi/`chunk`/`lazy`, pilih kolom yang perlu, eager load, dan indeks untuk kolom filter.
+- Feature test API mengirim `spaHeaders()` (Referer `http://localhost`) agar Sanctum memakai sesi.
