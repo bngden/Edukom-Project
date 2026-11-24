@@ -38,6 +38,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->prepend(RequestId::class);
         $middleware->statefulApi();
+        $middleware->redirectGuestsTo(fn () => route('login'));
+        $middleware->redirectUsersTo(fn () => route('beranda'));
     })
     ->withExceptions(function (Exceptions $exceptions) use ($apiError): void {
         $isApi = static fn (Request $request): bool => $request->is('api/*') || $request->expectsJson();
@@ -46,6 +48,16 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // Galat bisnis (salah password, akun terkunci, dsb.) bukan error aplikasi; jangan masuk laravel.log.
         $exceptions->dontReport([ApiException::class]);
+
+        $exceptions->render(function (ThrottleRequestsException $e, Request $request) use ($isApi) {
+            if ($isApi($request) || ! $request->routeIs('login.store')) {
+                return null;
+            }
+
+            return back()
+                ->withErrors(['auth' => 'Terlalu banyak percobaan masuk. Coba lagi dalam '.($e->getHeaders()['Retry-After'] ?? 60).' detik.'])
+                ->onlyInput('email');
+        });
 
         $exceptions->render(function (Throwable $e, Request $request) use ($isApi, $apiError) {
             if (! $isApi($request)) {

@@ -1,17 +1,17 @@
 # Graph Report - Edukom-Project  (2026-11-25)
 
 ## Corpus Check
-- 97 files · ~103,399 words
+- 108 files · ~104,427 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 10 file(s) not represented in the graph (top: (none) 6, .example 1, .xml 1)
 
 ## Summary
-- 696 nodes · 785 edges · 65 communities (29 shown, 36 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 12 edges (avg confidence: 0.87)
+- 740 nodes · 857 edges · 75 communities (32 shown, 43 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 14 edges (avg confidence: 0.86)
 - Token cost: 52,587 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `79c17723`
+- Built from commit: `80b6d904`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -21,17 +21,16 @@
 - Graphify & Task Logging Docs
 - Database Migrations
 - User Model & Seeding
-- Illuminate\Support\Str
+- Controller
 - Composer Scripts
 - bootstrap/app.php
 - Composer Plugin Settings
-- Service Providers
 - LoginTest.php
 - Unit Tests
 - BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)
 - 3.4 Kebutuhan Fungsional Tentor (TN)
 - Robots Crawl Policy
-- DatabaseSeeder.php
+- Frontend Design
 - Q: TASK 2026-11-25: Pemetaan dokumen ke graph (/graphify .)
 - BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)
 - tasks/README.md
@@ -63,32 +62,32 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `3.3 Kebutuhan Fungsional Admin (AD)` - 35 edges
-2. `3.2 Modul Administrasi Pembelajaran (ADM)` - 21 edges
-3. `User` - 20 edges
-4. `Role` - 19 edges
+2. `Role` - 21 edges
+3. `User` - 21 edges
+4. `3.2 Modul Administrasi Pembelajaran (ADM)` - 21 edges
 5. `3.4 Kebutuhan Fungsional Tentor (TN)` - 19 edges
 6. `3.1 Ketentuan Umum dan Layanan Bersama` - 14 edges
 7. `3.1 Ketentuan Umum dan Layanan Bersama` - 14 edges
 8. `3.2 Kebutuhan Fungsional Owner (OW)` - 14 edges
-9. `require-dev` - 10 edges
-10. `3.5 Modul Manajemen Aset dan Ekspedisi (AST)` - 10 edges
+9. `Controller` - 11 edges
+10. `ApiException` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `T0.1 — Autentikasi (2026-11-25)` --references--> `ApiException`  [INFERRED]
-  docs/PROGRESS.md → app/Exceptions/ApiException.php
 - `T0.1 — Autentikasi (2026-11-25)` --references--> `RequestId`  [INFERRED]
   docs/PROGRESS.md → app/Http/Middleware/RequestId.php
 - `T0.1 — Autentikasi (2026-11-25)` --references--> `spaHeaders()`  [INFERRED]
   docs/PROGRESS.md → tests/Pest.php
-- `{closure#1}()` --calls--> `spaHeaders()`  [INFERRED]
-  tests/Feature/Api/V1/HealthTest.php → tests/Pest.php
+- `T0.1 — Autentikasi (2026-11-25)` --references--> `ApiException`  [INFERRED]
+  docs/PROGRESS.md → app/Exceptions/ApiException.php
 - `Memory: TASK 2026-11-25 Setup graphify knowledge graph` --implements--> `graphify save-result memory step`  [INFERRED]
   graphify-out/memory/query_20261124_181742_110e102b_task_2026_11_25__setup_graphify_knowledge_graph.md → CLAUDE.md
+- `{closure#2}()` --references--> `Role`  [EXTRACTED]
+  tests/Unit/RoleTest.php → app/Enums/Role.php
 
 ## Import Cycles
 - None detected.
 
-## Communities (65 total, 36 thin omitted)
+## Communities (75 total, 43 thin omitted)
 
 ### Community 0 - "composer.json"
 Cohesion: 0.22
@@ -96,7 +95,7 @@ Nodes (8): description, keywords, license, minimum-stability, name, prefer-stabl
 
 ### Community 1 - "Frontend Build Dependencies"
 Cohesion: 0.12
-Nodes (19): devDependencies, axios@^1.11.0, concurrently@^9.0.1, laravel-vite-plugin@^2.0.0, tailwindcss@^4.0.0, @tailwindcss/vite@^4.0.0, vite@^7.0.7, private (+11 more)
+Nodes (21): devDependencies, axios@^1.11.0, concurrently@^9.0.1, @fontsource/poppins@^5.3.0, laravel-vite-plugin@^2.0.0, tailwindcss@^4.0.0, @tailwindcss/vite@^4.0.0, vite@^7.0.7 (+13 more)
 
 ### Community 2 - "Graphify & Task Logging Docs"
 Cohesion: 0.12
@@ -106,21 +105,25 @@ Nodes (12): graphify (CLAUDE.md section), graphify reflect (LESSONS.md), graphif
 Cohesion: 0.12
 Nodes (11): {closure#1}(), {closure#2}(), {closure#3}(), {closure#1}(), {closure#2}(), {closure#1}(), {closure#2}(), {closure#3}() (+3 more)
 
+### Community 5 - "Controller"
+Cohesion: 0.07
+Nodes (11): ChangePassword, LoginUser, AuthController, HealthController, Controller, BerandaController, LoginController, PasswordController (+3 more)
+
 ### Community 6 - "Composer Scripts"
 Cohesion: 0.22
 Nodes (9): scripts, dev, post-autoload-dump, post-create-project-cmd, post-root-package-install, post-update-cmd, pre-package-uninstall, setup (+1 more)
 
 ### Community 7 - "bootstrap/app.php"
-Cohesion: 0.05
-Nodes (13): ChangePassword, AuthController, HealthController, Controller, RequestId, ChangePasswordRequest, UserResource, {closure#1}() (+5 more)
+Cohesion: 0.07
+Nodes (10): RequestId, UserResource, AppServiceProvider, {closure#1}(), {closure#2}(), {closure#5}(), {closure#6}(), {closure#7}() (+2 more)
 
 ### Community 8 - "Composer Plugin Settings"
 Cohesion: 0.29
 Nodes (7): pestphp/pest-plugin, php-http/discovery, config, allow-plugins, optimize-autoloader, preferred-install, sort-packages
 
 ### Community 10 - "LoginTest.php"
-Cohesion: 0.10
-Nodes (18): Log per task, Progress — Irisan Owner, Ringkasan, T0.1 — Autentikasi (2026-11-25), Templat, {closure#1}(), {closure#10}(), {closure#2}() (+10 more)
+Cohesion: 0.09
+Nodes (13): {closure#1}(), {closure#10}(), {closure#2}(), {closure#3}(), {closure#5}(), {closure#6}(), {closure#7}(), {closure#8}() (+5 more)
 
 ### Community 15 - "BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)"
 Cohesion: 0.05
@@ -129,6 +132,10 @@ Nodes (43): 1.1 Latar Belakang, 1.2 Tujuan Penyusunan Dokumen, 1.3.1 Modul Admin
 ### Community 16 - "3.4 Kebutuhan Fungsional Tentor (TN)"
 Cohesion: 0.05
 Nodes (44): 3.2 Kebutuhan Fungsional Owner (OW), 3.4 Kebutuhan Fungsional Tentor (TN), 3.5 Kebutuhan Fungsional Kurir (KR), 3.6 Kebutuhan Fungsional Teknisi (TK), BAB III KEBUTUHAN FUNGSIONAL (USER STORIES), KR-01 \| Melihat Tugas Distribusi, KR-02 \| Serah Terima Pengantaran Perangkat, KR-03 \| Serah Terima Penjemputan Perangkat (+36 more)
+
+### Community 23 - "Frontend Design"
+Cohesion: 0.29
+Nodes (6): Design principles, Frontend Design, Ground your designs in the subject matter, More on writing in design, Process: plan, review against the brief, build, critique, Restraint and self-critique
 
 ### Community 25 - "Q: TASK 2026-11-25: Pemetaan dokumen ke graph (/graphify .)"
 Cohesion: 0.40
@@ -161,6 +168,10 @@ Nodes (14): 3.1 Ketentuan Umum dan Layanan Bersama, Istilah Baku, Kode Modul, KU
 ### Community 33 - "3.1 Ketentuan Umum dan Layanan Bersama"
 Cohesion: 0.14
 Nodes (14): 3.1 Ketentuan Umum dan Layanan Bersama, Istilah Baku, Kode Peran, KU-01 \| Penentuan Jarak Domisili Tentor ke Sekolah, KU-02 \| Pemeriksaan Lokasi Kehadiran dan Serah Terima, KU-03 \| Pemberitahuan, KU-04 \| Lampiran dan Berkas Bukti, KU-05 \| Riwayat Perubahan Data (+6 more)
+
+### Community 35 - "ApiException"
+Cohesion: 0.13
+Nodes (7): ApiException, DatabaseSeeder, Log per task, Progress — Irisan Owner, Ringkasan, T0.1 — Autentikasi (2026-11-25), Templat
 
 ### Community 36 - "Role"
 Cohesion: 0.21
@@ -207,24 +218,24 @@ Cohesion: 0.67
 Nodes (3): extra, laravel, dont-discover
 
 ## Knowledge Gaps
-- **13 isolated node(s):** `Owner`, `Admin`, `Tentor`, `Kurir`, `Teknisi` (+8 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 453 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **36 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **12 isolated node(s):** `Owner`, `Admin`, `Tentor`, `Kurir`, `Teknisi` (+7 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 478 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **43 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `BAB III KEBUTUHAN FUNGSIONAL (USER STORIES)` connect `3.4 Kebutuhan Fungsional Tentor (TN)` to `3.1 Ketentuan Umum dan Layanan Bersama`, `3.3 Kebutuhan Fungsional Admin (AD)`, `BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)`?**
-  _High betweenness centrality (0.030) - this node is a cross-community bridge._
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
 - **What connects `Owner`, `Admin`, `Tentor` to the rest of the system?**
-  _13 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _12 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Frontend Build Dependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.11857707509881422 - nodes in this community are weakly interconnected._
-- **Why does `User` connect `User Model & Seeding` to `SessionTest.php`, `ApiException`, `UserFactory.php`, `bootstrap/app.php`, `LoginUser.php`, `LoginTest.php`, `DatabaseSeeder.php`, `LoginRequest`?**
-  _High betweenness centrality (0.029) - this node is a cross-community bridge._
+  _Cohesion score 0.1225296442687747 - nodes in this community are weakly interconnected._
+- **Why does `User` connect `User Model & Seeding` to `SessionTest.php`, `ApiException`, `Controller`, `UserFactory.php`, `bootstrap/app.php`, `LoginUser.php`, `AuthPagesTest.php`, `LoginTest.php`, `ChangePassword.php`, `LoginRequest`?**
+  _High betweenness centrality (0.026) - this node is a cross-community bridge._
 - **Should `Graphify & Task Logging Docs` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
-- **Why does `BAB III KEBUTUHAN FUNGSIONAL (USER STORIES)` connect `BAB III KEBUTUHAN FUNGSIONAL (USER STORIES)` to `3.1 Ketentuan Umum dan Layanan Bersama`, `3.5 Modul Manajemen Aset dan Ekspedisi (AST)`, `3.3 Modul Izin dan Penggantian Tentor (IZN)`, `3.4 Modul Presensi dan Penggajian Tentor IT (PAY)`, `BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)`, `3.2 Modul Administrasi Pembelajaran (ADM)`?**
-  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+- **Why does `Role` connect `Role` to `SessionTest.php`, `ApiException`, `User Model & Seeding`, `UserFactory.php`, `Controller`, `LoginUser.php`, `AuthPagesTest.php`, `LoginTest.php`, `LoginRequest`?**
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **Should `Database Migrations` be split into smaller, more focused modules?**
   _Cohesion score 0.11576354679802955 - nodes in this community are weakly interconnected._

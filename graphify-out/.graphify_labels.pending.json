@@ -1,11 +1,13 @@
 {
   "0": "composer.json",
-  "5": "Illuminate\\Support\\Str",
+  "5": "Controller",
   "7": "bootstrap/app.php",
+  "9": "AuthPagesTest.php",
   "10": "LoginTest.php",
   "15": "BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)",
   "16": "3.4 Kebutuhan Fungsional Tentor (TN)",
-  "24": "DatabaseSeeder.php",
+  "23": "Frontend Design",
+  "24": "ChangePassword.php",
   "25": "Q: TASK 2026-11-25: Pemetaan dokumen ke graph (/graphify .)",
   "26": "BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)",
   "27": "tasks/README.md",
@@ -45,5 +47,15 @@
   "61": "id/auth.php",
   "62": "id/pagination.php",
   "63": "id/passwords.php",
-  "64": "id/validation.php"
+  "64": "id/validation.php",
+  "65": "app.js",
+  "66": "kata-sandi.blade.php",
+  "67": "login.blade.php",
+  "68": "beranda.blade.php",
+  "69": "alert.blade.php",
+  "70": "brand.blade.php",
+  "71": "field.blade.php",
+  "72": "icon.blade.php",
+  "73": "app.blade.php",
+  "74": "base.blade.php"
 }

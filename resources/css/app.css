@@ -1,11 +1,62 @@
+@import '@fontsource/poppins/latin-400.css';
+@import '@fontsource/poppins/latin-500.css';
+@import '@fontsource/poppins/latin-600.css';
 @import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+
+    --color-royal: #2b5fd9;
+    --color-royal-700: #1f48b0;
+    --color-royal-50: #eef3ff;
+    --color-ink: #1b2433;
+    --color-muted: #6b7385;
+    --color-line: #e7ebf2;
+    --color-canvas: #f4f6fa;
+    --color-quiet: #eef0f4;
+    --color-danger: #d94848;
+    --color-danger-bg: #fdecec;
+    --color-success: #1f9d63;
+    --color-success-bg: #e8f6ef;
+    --color-nav-text: rgb(255 255 255 / 0.75);
+    --color-nav-active: rgb(255 255 255 / 0.14);
+
+    --radius-control: 12px;
+    --radius-card: 16px;
+    --radius-panel: 24px;
+    --radius-curve: 40px;
+
+    --shadow-float: 0 8px 24px rgb(27 36 51 / 0.06);
+
+    --text-title: 26px;
+    --text-title--line-height: 34px;
+    --text-title-sm: 22px;
+    --text-title-sm--line-height: 28px;
+    --text-body: 14px;
+    --text-body--line-height: 22px;
+    --text-caption: 12px;
+    --text-caption--line-height: 18px;
+}
+
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+        font-variant-numeric: tabular-nums;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-royal);
+        outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            transition: none !important;
+        }
+    }
 }

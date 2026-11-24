@@ -26,6 +26,17 @@ Peran: `owner`, `admin`, `tentor`, `kurir`, `teknisi`.
 Cek layanan: `GET /api/v1/health`. Frontend SPA memanggil `GET /sanctum/csrf-cookie` lebih dulu, lalu `POST /api/v1/auth/login`.
 Domain frontend diatur di `SANCTUM_STATEFUL_DOMAINS` dan `CORS_ALLOWED_ORIGINS`.
 
+## Tampilan web (Blade)
+
+```bash
+npm install
+npm run build      # atau npm run dev saat mengubah tampilan
+php artisan serve  # buka http://127.0.0.1:8000/login
+```
+
+Halaman: `/login`, `/beranda`, `/akun/kata-sandi`. Warna, font (Poppins, disimpan lokal), ikon (Material Symbols),
+dan logo diambil dari design system Stitch "Edukom ERP Operations".
+
 ## Database test
 
 Test memakai koneksi database dari `.env` (saat ini `db_edukom` di server remote).
