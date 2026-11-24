@@ -232,5 +232,17 @@
     "seen": 1795545039.524944,
     "ast_hash": "b4b61b8072e43631b8cfecd08425f428",
     "semantic_hash": "b4b61b8072e43631b8cfecd08425f428"
+  },
+  "docs/tasks/2026-11-25-graphify-semantic-docs.md": {
+    "mtime": 1795545047.1855764,
+    "seen": 1795545048.910645,
+    "ast_hash": "d2fffbfdc4b601dec12cf66a01cad86f",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20261124_183047_3d0cf959_task_2026_11_25__pemetaan_dokumen_ke_graph___graph.md": {
+    "mtime": 1795545047.423835,
+    "seen": 1795545048.910645,
+    "ast_hash": "c6b913e79457670edba3652b4cb41020",
+    "semantic_hash": ""
   }
 }
