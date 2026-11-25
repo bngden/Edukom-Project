@@ -186,9 +186,9 @@
     "semantic_hash": "60c40741a9c5b915a5e5542cfb23bc25"
   },
   "CLAUDE.md": {
-    "mtime": 1795585474.6742773,
-    "seen": 1795585483.059634,
-    "ast_hash": "530b0536c3ecc90a25d3e5a5b40cb949",
+    "mtime": 1795587922.3056679,
+    "seen": 1795588479.4346209,
+    "ast_hash": "9d8421b57d241c81abe582674421708f",
     "semantic_hash": ""
   },
   "README.md": {
@@ -228,9 +228,9 @@
     "semantic_hash": ""
   },
   "app/Domain/Auth/Actions/LoginUser.php": {
-    "mtime": 1795547602.5292506,
-    "seen": 1795548159.494135,
-    "ast_hash": "cc74065c5a05d3ba34683ca5e2c5eba9",
+    "mtime": 1795587994.4071853,
+    "seen": 1795588479.4346209,
+    "ast_hash": "aa65311958246cb76eaed46f2b3be396",
     "semantic_hash": ""
   },
   "app/Enums/Role.php": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "routes/api.php": {
-    "mtime": 1795547633.3290877,
-    "seen": 1795548159.494135,
-    "ast_hash": "567a45c17f349e417b479d85ab286294",
+    "mtime": 1795587994.5828066,
+    "seen": 1795588479.4346209,
+    "ast_hash": "936515a5661d3fb0a1e738cbe50b380e",
     "semantic_hash": ""
   },
   "tests/Feature/Api/V1/Auth/LoginTest.php": {
@@ -420,9 +420,9 @@
     "semantic_hash": ""
   },
   "docs/PROGRESS.md": {
-    "mtime": 1795585474.7519946,
-    "seen": 1795585483.059634,
-    "ast_hash": "20f0ed6c0cba283b8a78074cd9f90b10",
+    "mtime": 1795587936.918497,
+    "seen": 1795588479.4346209,
+    "ast_hash": "5af45b61ac3bde8897ee54b92a796e16",
     "semantic_hash": ""
   },
   "docs/TASK_OWNER.md": {
@@ -462,111 +462,21 @@
     "semantic_hash": ""
   },
   "docs/tasks/README.md": {
-    "mtime": 1795545741.637988,
-    "seen": 1795548159.494135,
-    "ast_hash": "c91bd4f817c53d506d0d5aba451c6cc5",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T0.1-autentikasi.md": {
-    "mtime": 1795545741.7008152,
-    "seen": 1795548159.494135,
-    "ast_hash": "37e3dab1cf6694aa609d2cd29a2f9168",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T0.2-hak-akses.md": {
-    "mtime": 1795545741.576097,
-    "seen": 1795548159.494135,
-    "ast_hash": "a939c56afd81f3547c41a609ebdb8bad",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T0.3-audit-trail.md": {
-    "mtime": 1795545741.5881543,
-    "seen": 1795548159.494135,
-    "ast_hash": "64e2a6003f1ad05b654f1f54c243f8f6",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T0.4-notifikasi.md": {
-    "mtime": 1795545741.675604,
-    "seen": 1795548159.494135,
-    "ast_hash": "0e89d786551e8e234bc0a94a8045d885",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T0.5-periode-dan-data-berversi.md": {
-    "mtime": 1795545741.6155791,
-    "seen": 1795548159.494135,
-    "ast_hash": "6de00266a7dd217054d6b39fed563a84",
+    "mtime": 1795587122.4466,
+    "seen": 1795588479.4346209,
+    "ast_hash": "ba3a4e6e6e13c8027f59ed8d73cf4750",
     "semantic_hash": ""
   },
   "docs/tasks/T1.1-parameter-kebijakan.md": {
-    "mtime": 1795545741.6937711,
-    "seen": 1795548159.494135,
-    "ast_hash": "ed0f7410304b2666256633dd62bec83f",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T1.2-komponen-honorarium.md": {
-    "mtime": 1795545741.6852546,
-    "seen": 1795548159.494135,
-    "ast_hash": "73db03bbb27f537b49ce5285128fb9f9",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T1.3-tingkatan-jarak-transport.md": {
-    "mtime": 1795545741.6316533,
-    "seen": 1795548159.494135,
-    "ast_hash": "b0409f9f4168fce9e0e76a9f6c41171d",
+    "mtime": 1795587122.5325875,
+    "seen": 1795588479.4346209,
+    "ast_hash": "2d633aceb2aaec5ac1dd14e625806b49",
     "semantic_hash": ""
   },
   "docs/tasks/T1.4-alasan-penolakan.md": {
-    "mtime": 1795545741.606321,
-    "seen": 1795548159.494135,
-    "ast_hash": "83191ece7f4537d44258e804e466749f",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T1.5-konsolidasi-fase1.md": {
-    "mtime": 1795545741.5972748,
-    "seen": 1795548159.494135,
-    "ast_hash": "6ebc8dc5d88dbca87bf1d9b63e2a2abe",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T2.0-perbaikan-desain-stitch.md": {
-    "mtime": 1795545741.7067683,
-    "seen": 1795548159.494135,
-    "ast_hash": "121323e5fa4d3826ce0f0d2fc29ce185",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T2.1-setup-frontend.md": {
-    "mtime": 1795545741.6230662,
-    "seen": 1795548159.494135,
-    "ast_hash": "79b5f4c2eb42502641c7274f46994e61",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T2.2-login-layout-beranda.md": {
-    "mtime": 1795545741.661397,
-    "seen": 1795548159.494135,
-    "ast_hash": "bbd3ed2ea2085646effd385833767b2e",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T2.3-halaman-parameter.md": {
-    "mtime": 1795545741.6473005,
-    "seen": 1795548159.494135,
-    "ast_hash": "17d97a45b71ec47c75b710e51016f494",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T2.4-halaman-komponen-honor.md": {
-    "mtime": 1795545741.6671522,
-    "seen": 1795548159.494135,
-    "ast_hash": "6b98e26fd9b3d58a39bb0d0974dd8904",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T2.5-halaman-alasan-penolakan.md": {
-    "mtime": 1795545741.716268,
-    "seen": 1795548159.494135,
-    "ast_hash": "404b0c0d39cb39b8344fab13a0a3c9d5",
-    "semantic_hash": ""
-  },
-  "docs/tasks/T2.6-riwayat-dan-e2e.md": {
-    "mtime": 1795545741.648795,
-    "seen": 1795548159.494135,
-    "ast_hash": "93df3ed8157415eba6b49e979468729c",
+    "mtime": 1795587122.422873,
+    "seen": 1795588479.4346209,
+    "ast_hash": "7a0133275db4732de430640e8e46ff18",
     "semantic_hash": ""
   },
   "app/Http/Controllers/Web/BerandaController.php": {
@@ -744,9 +654,9 @@
     "semantic_hash": ""
   },
   "app/Domain/Access/Actions/RecordAccessDenial.php": {
-    "mtime": 1795585217.6000595,
-    "seen": 1795585483.059634,
-    "ast_hash": "8bfee48708e7a139428e41d3d3c57adc",
+    "mtime": 1795587994.5100138,
+    "seen": 1795588479.4346209,
+    "ast_hash": "89ec639ec91ea590c44cfe4df831478a",
     "semantic_hash": ""
   },
   "app/Http/Middleware/EnsureUserHasRole.php": {
@@ -768,9 +678,9 @@
     "semantic_hash": ""
   },
   "tests/Datasets/Roles.php": {
-    "mtime": 1795585249.3127844,
-    "seen": 1795585483.059634,
-    "ast_hash": "924645fb9b49ea2388dcd409fff4f1d0",
+    "mtime": 1795588000.6931844,
+    "seen": 1795588479.4346209,
+    "ast_hash": "e1ce452e022b8fc4fcd03e134abc0e77",
     "semantic_hash": ""
   },
   "tests/Feature/Access/RoleAccessTest.php": {
@@ -783,6 +693,192 @@
     "mtime": 1795585249.3762271,
     "seen": 1795585483.059634,
     "ast_hash": "dcfd282cbd4b429a9a5aba52c30d198a",
+    "semantic_hash": ""
+  },
+  "app/Console/Commands/PurgeAudit.php": {
+    "mtime": 1795587994.9279573,
+    "seen": 1795588479.4346209,
+    "ast_hash": "8f8cf69e080436fe1a4f3761f8f12772",
+    "semantic_hash": ""
+  },
+  "app/Domain/Audit/Audit.php": {
+    "mtime": 1795587993.7917187,
+    "seen": 1795588479.4346209,
+    "ast_hash": "f452a924f3895451e7cfd99d44574553",
+    "semantic_hash": ""
+  },
+  "app/Http/Controllers/Api/V1/AuditLogController.php": {
+    "mtime": 1795587994.7650337,
+    "seen": 1795588479.4346209,
+    "ast_hash": "8be727ffa93db7413c070baf7a0645a2",
+    "semantic_hash": ""
+  },
+  "app/Http/Requests/Api/V1/AuditLogIndexRequest.php": {
+    "mtime": 1795587994.8479984,
+    "seen": 1795588479.4346209,
+    "ast_hash": "b69b8908c0cc3ab0830bfbd324d2055a",
+    "semantic_hash": ""
+  },
+  "app/Http/Resources/V1/AuditLogResource.php": {
+    "mtime": 1795587719.5946562,
+    "seen": 1795588479.4346209,
+    "ast_hash": "2a2122c80e6c806c94acf82b3fadd2f2",
+    "semantic_hash": ""
+  },
+  "app/Models/AuditLog.php": {
+    "mtime": 1795587657.9920156,
+    "seen": 1795588479.4346209,
+    "ast_hash": "333a28db57af87743137e54cfec39cb2",
+    "semantic_hash": ""
+  },
+  "database/migrations/2026_11_25_000003_create_audit_logs_table.php": {
+    "mtime": 1795587994.277053,
+    "seen": 1795588479.4346209,
+    "ast_hash": "137fe40fe59587a19b4abae3a22cc3d7",
+    "semantic_hash": ""
+  },
+  "tests/Feature/Audit/AuditLogEndpointTest.php": {
+    "mtime": 1795587995.3023095,
+    "seen": 1795588479.4346209,
+    "ast_hash": "a7e3ab60f72a2dcd6e811d39ed371034",
+    "semantic_hash": ""
+  },
+  "tests/Feature/Audit/AuditTest.php": {
+    "mtime": 1795587753.1922767,
+    "seen": 1795588479.4346209,
+    "ast_hash": "c3a6bba3af7dbee08e07f54262495f03",
+    "semantic_hash": ""
+  },
+  "docs/tasks/STITCH_SCREENS.md": {
+    "mtime": 1795587122.5408137,
+    "seen": 1795588479.4346209,
+    "ast_hash": "cb42c171bdc3ea64187b4e16c9a4d27a",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T0.0-desain-stitch-owner.md": {
+    "mtime": 1795587122.4985964,
+    "seen": 1795588479.4346209,
+    "ast_hash": "9808f6b38715a7abc060c67eb5a5afc3",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T0.1-setup-fullstack.md": {
+    "mtime": 1795587122.5126958,
+    "seen": 1795588479.4346209,
+    "ast_hash": "a7785c1c8f9dd065723c4d281cf866a6",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T0.2-auth-akun-layout.md": {
+    "mtime": 1795587122.4616663,
+    "seen": 1795588479.4346209,
+    "ast_hash": "5e1e2d5b47b5d016708b3266d37f9105",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T0.3-hak-akses.md": {
+    "mtime": 1795587122.548597,
+    "seen": 1795588479.4346209,
+    "ast_hash": "1e07a8f569fd03234b26b8d0780826f7",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T0.4-riwayat-perubahan.md": {
+    "mtime": 1795587122.4767325,
+    "seen": 1795588479.4346209,
+    "ast_hash": "26948cc83895b044058196042615387e",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T0.5-notifikasi.md": {
+    "mtime": 1795587122.406723,
+    "seen": 1795588479.4346209,
+    "ast_hash": "3d7f63a36e21802663d0e4763e2bda76",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T0.6-periode-data-berversi.md": {
+    "mtime": 1795587122.5608552,
+    "seen": 1795588479.4346209,
+    "ast_hash": "cd4862e3f55a98e84e5b614200f07c44",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T1.2-komponen-honor.md": {
+    "mtime": 1795587122.5264976,
+    "seen": 1795588479.4346209,
+    "ast_hash": "d78ce5c8015c5a97dce2da6dc9a08b6c",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T1.3-tingkatan-jarak.md": {
+    "mtime": 1795587122.3805044,
+    "seen": 1795588479.4346209,
+    "ast_hash": "61a2a1fa48ed3be8eb53148dea25516b",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T1.5-masa-simpan.md": {
+    "mtime": 1795587122.4831705,
+    "seen": 1795588479.4346209,
+    "ast_hash": "1d46277aeb35e45e74ecc07c207cac33",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T1.6-beranda-konsolidasi-fase1.md": {
+    "mtime": 1795587122.3967729,
+    "seen": 1795588479.4346209,
+    "ast_hash": "298fa62a5ca12672377e28fa94fde3ab",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T2.1-kerangka-data-operasional.md": {
+    "mtime": 1795587122.4565997,
+    "seen": 1795588479.4346209,
+    "ast_hash": "8347b2253dcc9279ead5c5c9c1cffae8",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T2.2-persetujuan-honorarium.md": {
+    "mtime": 1795587122.5663939,
+    "seen": 1795588479.4346209,
+    "ast_hash": "9967646cc127bfb465e8be80e8493723",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T2.3-penyesuaian-honor.md": {
+    "mtime": 1795587122.4142914,
+    "seen": 1795588479.4346209,
+    "ast_hash": "7bfa41d443191125746d74a9c91f8da6",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T2.4-pengadaan-aset.md": {
+    "mtime": 1795587122.4300342,
+    "seen": 1795588479.4346209,
+    "ast_hash": "54ed508aaacafe94912fc3631726ecdb",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T2.5-eskalasi-izin-mendesak.md": {
+    "mtime": 1795587122.4696927,
+    "seen": 1795588479.4346209,
+    "ast_hash": "487f1583b24a1d3a6434ae735d54c208",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T3.1-pemantauan-pembelajaran.md": {
+    "mtime": 1795587122.5554235,
+    "seen": 1795588479.4346209,
+    "ast_hash": "81b11f10a6044cd69158109fe92f6af8",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T3.2-aset-perangkat.md": {
+    "mtime": 1795587122.488761,
+    "seen": 1795588479.4346209,
+    "ast_hash": "1566fdd861d15c6498c3b05fbee300df",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T3.3-rekap-izin.md": {
+    "mtime": 1795587122.5051286,
+    "seen": 1795588479.4346209,
+    "ast_hash": "db8f46bdf55816b973d393c7271fdb9c",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T3.4-pembayaran-honor.md": {
+    "mtime": 1795587122.5191095,
+    "seen": 1795588479.4346209,
+    "ast_hash": "6c7655e0a7e89b16648bcfebf8cec211",
+    "semantic_hash": ""
+  },
+  "docs/tasks/T3.5-beranda-final-e2e.md": {
+    "mtime": 1795587122.4384522,
+    "seen": 1795588479.4346209,
+    "ast_hash": "791e4adae55761b96451aa1840af212e",
     "semantic_hash": ""
   },
   "package-lock.json": {

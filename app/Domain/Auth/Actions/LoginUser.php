@@ -2,6 +2,7 @@
 
 namespace App\Domain\Auth\Actions;
 
+use App\Domain\Audit\Audit;
 use App\Exceptions\ApiException;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -46,13 +47,22 @@ class LoginUser
                 $attempts = $user->failed_login_attempts + 1;
                 $user->failed_login_attempts = $attempts;
 
-                if ($attempts >= (int) config('edukom.auth.max_failed_attempts')) {
+                $locked = $attempts >= (int) config('edukom.auth.max_failed_attempts');
+
+                if ($locked) {
                     $user->locked_until = now()->addMinutes((int) config('edukom.auth.lock_minutes'));
                 }
 
                 $user->save();
 
-                return [$user->isLocked() ? 'locked' : 'invalid', $user, 'wrong_password'];
+                if ($locked) {
+                    Audit::record('auth.account_locked', $user, null, [
+                        'failed_login_attempts' => $attempts,
+                        'locked_until' => $user->locked_until->toIso8601String(),
+                    ]);
+                }
+
+                return [$locked ? 'locked' : 'invalid', $user, 'wrong_password'];
             }
 
             if (! $user->is_active) {

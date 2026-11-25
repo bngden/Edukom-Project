@@ -88,3 +88,19 @@ it('menolak role selain owner', function (Role $role) {
     $this->withHeaders(spaHeaders())->getJson('/api/v1/...')->assertForbidden();
 })->with('all_roles_except_owner');
 ```
+
+## Riwayat perubahan (audit)
+
+- Catat setiap perubahan data penting dengan `App\Domain\Audit\Audit::record($action, $subject, $before, $after, $reason)`
+  **di dalam** `DB::transaction` yang sama dengan perubahannya (bila transaksi batal, catatan ikut batal).
+- `$action`: `<subjek>.<kejadian>` snake_case, misalnya `policy_parameter.version_created`.
+- `$subject`: model Eloquent (label diambil dari kolom `name`, kalau tidak ada dari ID) atau
+  `['type' => ..., 'id' => ..., 'label' => ...]` untuk subjek non-model.
+- Bila `$before` dan `$after` diisi, hanya atribut yang berubah yang disimpan. Key yang mengandung
+  `password`, `token`, atau `secret` disamarkan `***`.
+- Pelaku diambil otomatis dari user login; tanpa login (command, job) → pelaku `system`.
+- Tabel `audit_logs` append-only: model melempar exception saat update/delete, dan trigger DB menolak
+  UPDATE/DELETE. Penghapusan hanya lewat `php artisan edukom:purge-audit --before=YYYY-MM-DD`.
+- Sudah tercatat otomatis: `access.denied` (setiap 403 otorisasi), `auth.account_locked`, `audit.purged`.
+- API: `GET /api/v1/audit-logs` (owner, admin), filter `subject_type`, `subject_id`, `actor_id`, `action`,
+  `date_from`, `date_to` (YYYY-MM-DD), 25 per halaman, terbaru dulu.

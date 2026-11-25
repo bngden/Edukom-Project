@@ -2,6 +2,7 @@
 
 namespace App\Domain\Access\Actions;
 
+use App\Domain\Audit\Audit;
 use App\Models\AccessDenial;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class RecordAccessDenial
         $user = $request->user();
 
         try {
-            AccessDenial::query()->create([
+            $denial = AccessDenial::query()->create([
                 'user_id' => $user instanceof User ? $user->id : null,
                 'role' => $user instanceof User ? $user->role->value : null,
                 'method' => $request->method(),
@@ -24,6 +25,12 @@ class RecordAccessDenial
                 'route_name' => $request->route()?->getName(),
                 'ip' => $request->ip(),
                 'occurred_at' => now(),
+            ]);
+
+            Audit::record('access.denied', [
+                'type' => 'route',
+                'id' => $denial->route_name,
+                'label' => "{$denial->method} {$denial->path}",
             ]);
         } catch (Throwable $e) {
             // Gagal mencatat tidak boleh mengubah respons 403 menjadi 500.

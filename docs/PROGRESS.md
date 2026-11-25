@@ -10,7 +10,7 @@ Diperbarui oleh agent di akhir setiap task. Manusia memeriksa dan mengubah statu
 |---|---|---|---|---|---|
 | T0.1 | Autentikasi (Laravel sudah terpasang) | 🟡 | feat/t0-1-autentikasi | 2026-11-25 | Menunggu review; 24 test lulus |
 | T0.2 | Hak akses berbasis peran | 🟡 | feat/t0-2-hak-akses | 2026-11-25 | Menunggu review; 21 test baru lulus |
-| T0.3 | Riwayat perubahan (audit trail) | ⬜ | | | |
+| T0.3 | Riwayat perubahan (audit trail) | 🟡 | feat/t0-3-audit-trail | 2026-11-25 | Menunggu review; 16 test baru lulus |
 | T0.4 | Notifikasi di dalam sistem | ⬜ | | | |
 | T0.5 | Periode penggajian (minimal) dan pola data berversi | ⬜ | | | |
 | T1.1 | Parameter kebijakan berversi (OW-02, AD-27) | ⬜ | | | |
@@ -29,6 +29,23 @@ Diperbarui oleh agent di akhir setiap task. Manusia memeriksa dan mengubah statu
 ## Log per task
 
 <!-- Salin templat di bawah untuk setiap task yang selesai. Terbaru di atas. -->
+
+### T0.3 — Riwayat perubahan / audit trail (2026-11-25)
+- **Branch:** feat/t0-3-audit-trail (dari feat/t0-2-hak-akses)
+- **Acuan:** spesifikasi task lama `T0.3-audit-trail.md` (commit e11be7d), skema API. Atas keputusan user, set task baru SRS v3 (Livewire, `spatie/laravel-activitylog`, ekspor, halaman Riwayat) **tidak** dipakai; tidak ada paket baru.
+- **Ringkasan perubahan:** tabel `audit_logs` append-only (model menolak update/delete, trigger MariaDB menolak UPDATE dan DELETE kecuali `@edukom_audit_purge = 1`). `Audit::record()` menyimpan pelaku (user atau `system`), hanya atribut yang berubah, alasan, IP, user agent, request_id; key berisi `password`/`token`/`secret` disamarkan. Integrasi `access.denied` (setiap 403 otorisasi) dan `auth.account_locked`. Command `edukom:purge-audit --before=YYYY-MM-DD` (hapus per 1.000 baris, mencatat `audit.purged`). Endpoint `GET /api/v1/audit-logs` (owner, admin) dengan filter dan paginasi 25.
+- **File/migration utama:** `2026_11_25_000003_create_audit_logs_table` (+ 2 trigger); `app/Models/AuditLog.php`; `app/Domain/Audit/Audit.php`; `app/Console/Commands/PurgeAudit.php`; `app/Http/Controllers/Api/V1/AuditLogController.php`; `app/Http/Requests/Api/V1/AuditLogIndexRequest.php`; `app/Http/Resources/V1/AuditLogResource.php`; diubah: `RecordAccessDenial`, `LoginUser`, `routes/api.php`, `CLAUDE.md` (bagian "Riwayat perubahan").
+- **Endpoint baru:** `GET /api/v1/audit-logs`.
+- **Test:** 16 test baru lulus (`tests/Feature/Audit/*`).
+- **Asumsi yang diambil:**
+  - Owner dan Admin melihat seluruh riwayat (task lama). Pembatasan Admin hanya ke data operasional (AD-38 di SRS v3) belum diterapkan.
+  - Label subjek dari kolom `name` model, kalau tidak ada dari ID. Untuk `access.denied` subjeknya `route` (id = nama route, label = "METHOD /path").
+  - Penguncian akun dicatat dengan pelaku `system` (pengguna belum login saat terkunci).
+  - `date_from`/`date_to` dalam format YYYY-MM-DD, zona waktu aplikasi (WIB), `date_to` inklusif.
+- **Perlu dikonfirmasi (pindahkan ke DECISIONS.md bila sudah dijawab):**
+  - Isi `docs/tasks/` di working tree sudah diganti set SRS v3 (Livewire) tetapi belum di-commit; user memutuskan coding tetap memakai skema API lama. `CLAUDE.md`/`DECISIONS.md` belum mencatat keputusan ini secara resmi.
+  - Masa simpan riwayat (purge belum dijadwalkan; menunggu parameter di T1.1).
+- **Catatan untuk task berikutnya:** setiap Action yang mengubah data penting memanggil `Audit::record` di dalam transaksinya.
 
 ### T0.2 — Hak akses berbasis peran (2026-11-25)
 - **Branch:** feat/t0-2-hak-akses (dari feat/ui-autentikasi, karena T0.1 dan UI login belum di-merge ke main)

@@ -30,9 +30,9 @@
     "semantic_hash": "e66bb13691f6184c762c196427d8e685"
   },
   "bootstrap/app.php": {
-    "mtime": 1795548885.51616,
-    "seen": 1795549466.8291,
-    "ast_hash": "4669fa1e4623d0e57794ec7910092413",
+    "mtime": 1795585251.0028322,
+    "seen": 1795585483.059634,
+    "ast_hash": "0aea38d5480fa3bb1691d61be990805e",
     "semantic_hash": ""
   },
   "bootstrap/providers.php": {
@@ -186,15 +186,15 @@
     "semantic_hash": "60c40741a9c5b915a5e5542cfb23bc25"
   },
   "CLAUDE.md": {
-    "mtime": 1795548146.5160613,
-    "seen": 1795548159.494135,
-    "ast_hash": "dae39bc7a6e6b49d62415b0f70c78573",
+    "mtime": 1795585474.6742773,
+    "seen": 1795585483.059634,
+    "ast_hash": "530b0536c3ecc90a25d3e5a5b40cb949",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1795548146.2509377,
-    "seen": 1795548159.494135,
-    "ast_hash": "dffc54619f8d37015f1417dccb881a44",
+    "mtime": 1795549467.0801365,
+    "seen": 1795585483.059634,
+    "ast_hash": "ff4074edd12b326a6a43f3d8bcd0b0eb",
     "semantic_hash": ""
   },
   "public/robots.txt": {
@@ -396,9 +396,9 @@
     "semantic_hash": ""
   },
   "tests/Pest.php": {
-    "mtime": 1795547728.3123455,
-    "seen": 1795548159.494135,
-    "ast_hash": "628b7d87ed4295ceb1935147f0a25068",
+    "mtime": 1795585315.060633,
+    "seen": 1795585483.059634,
+    "ast_hash": "364f2e1aa278a08eda74e53746c6c250",
     "semantic_hash": ""
   },
   "tests/Unit/RoleTest.php": {
@@ -420,9 +420,9 @@
     "semantic_hash": ""
   },
   "docs/PROGRESS.md": {
-    "mtime": 1795548146.9227438,
-    "seen": 1795548159.494135,
-    "ast_hash": "bab818e7bd63b66b4121ecf8131a18af",
+    "mtime": 1795585474.7519946,
+    "seen": 1795585483.059634,
+    "ast_hash": "20f0ed6c0cba283b8a78074cd9f90b10",
     "semantic_hash": ""
   },
   "docs/TASK_OWNER.md": {
@@ -741,6 +741,48 @@
     "mtime": 1795548743.873696,
     "seen": 1795549466.8291,
     "ast_hash": "8f7da754e6fe0cf7a4dbd802124ca591",
+    "semantic_hash": ""
+  },
+  "app/Domain/Access/Actions/RecordAccessDenial.php": {
+    "mtime": 1795585217.6000595,
+    "seen": 1795585483.059634,
+    "ast_hash": "8bfee48708e7a139428e41d3d3c57adc",
+    "semantic_hash": ""
+  },
+  "app/Http/Middleware/EnsureUserHasRole.php": {
+    "mtime": 1795585217.6410236,
+    "seen": 1795585483.059634,
+    "ast_hash": "a9e95fa4755dcf9ff984249644bb35bf",
+    "semantic_hash": ""
+  },
+  "app/Models/AccessDenial.php": {
+    "mtime": 1795585217.5529494,
+    "seen": 1795585483.059634,
+    "ast_hash": "dbc40e66beb610d8e0fa45b266a3bc2e",
+    "semantic_hash": ""
+  },
+  "database/migrations/2026_11_25_000002_create_access_denials_table.php": {
+    "mtime": 1795585217.5171747,
+    "seen": 1795585483.059634,
+    "ast_hash": "8953047577f0093b7125a7f936bc8fb6",
+    "semantic_hash": ""
+  },
+  "tests/Datasets/Roles.php": {
+    "mtime": 1795585249.3127844,
+    "seen": 1795585483.059634,
+    "ast_hash": "924645fb9b49ea2388dcd409fff4f1d0",
+    "semantic_hash": ""
+  },
+  "tests/Feature/Access/RoleAccessTest.php": {
+    "mtime": 1795585249.3442826,
+    "seen": 1795585483.059634,
+    "ast_hash": "522fb90fa3300642f5183722f4eade2a",
+    "semantic_hash": ""
+  },
+  "tests/Unit/RolesDatasetTest.php": {
+    "mtime": 1795585249.3762271,
+    "seen": 1795585483.059634,
+    "ast_hash": "dcfd282cbd4b429a9a5aba52c30d198a",
     "semantic_hash": ""
   },
   "package-lock.json": {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AuditLogController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\HealthController;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,8 @@ Route::prefix('auth')->name('api.v1.auth.')->group(function () {
         Route::get('/me', [AuthController::class, 'me'])->name('me');
         Route::put('/password', [AuthController::class, 'changePassword'])->name('password');
     });
+});
+
+Route::middleware(['auth:sanctum', 'role:owner,admin'])->name('api.v1.')->group(function () {
+    Route::get('/audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
 });
