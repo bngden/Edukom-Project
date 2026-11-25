@@ -1,17 +1,17 @@
 # Graph Report - Edukom-Project  (2026-11-25)
 
 ## Corpus Check
-- 131 files · ~125,777 words
+- 151 files · ~133,579 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 10 file(s) not represented in the graph (top: (none) 6, .example 1, .xml 1)
+- Unclassified: 11 file(s) not represented in the graph (top: (none) 7, .example 1, .xml 1)
 
 ## Summary
-- 1005 nodes · 1284 edges · 119 communities (67 shown, 52 thin omitted)
-- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 66 edges (avg confidence: 0.9)
+- 1660 nodes · 2015 edges · 153 communities (99 shown, 54 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 75 edges (avg confidence: 0.9)
 - Token cost: 52,587 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `adca1773`
+- Built from commit: `0fd0fd6a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -27,10 +27,11 @@
 - Composer Plugin Settings
 - LoginTest.php
 - Unit Tests
-- 1.3 Ruang Lingkup Sistem
+- BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)
 - 3.4 Kebutuhan Fungsional Tentor (TN)
 - Robots Crawl Policy
 - Frontend Design
+- endpoints
 - Q: TASK 2026-11-25: Pemetaan dokumen ke graph (/graphify .)
 - BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)
 - Daftar Task — Irisan Owner (SRS v3)
@@ -42,7 +43,7 @@
 - 3.1 Ketentuan Umum dan Layanan Bersama
 - SessionTest.php
 - ApiException
-- Role
+- RoleAccessTest.php
 - UserFactory.php
 - require-dev
 - 3.5 Modul Manajemen Aset dan Ekspedisi (AST)
@@ -62,22 +63,22 @@
 - EnsureUserHasRole.php
 - Illuminate\Http\Request
 - AppServiceProvider.php
-- Log per task
+- EdukomNotification
 - AuditTest.php
-- RecordAccessDenial.php
+- endpoints
 - 3.2 Kebutuhan Fungsional Owner (OW)
 - App\Http\Controllers\Api\V1\AuthController
 - LoginRequest
 - .record
 - Role
-- 2.3 Karakteristik dan Pemetaan Pengguna
-- Illuminate\Support\Str
+- endpoints
+- endpoints
 - BAB III KEBUTUHAN FUNGSIONAL (USER STORIES)
-- BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)
+- endpoints
 - T2.5 — Izin Mendesak di luar jam layanan Admin + Keputusan Eskalasi
 - T3.1 — Pemantauan Pembelajaran + Buka Kembali Laporan Terverifikasi
 - AuditLogController.php
-- LAMPIRAN
+- endpoints
 - T0.2 — Autentikasi, layout Owner, profil, dan pengelolaan akun Admin
 - T0.5 — Notifikasi di dalam sistem + panel notifikasi
 - T1.1 — Parameter Kebijakan berversi + halaman Parameter Kebijakan
@@ -91,6 +92,7 @@
 - T3.2 — Pemantauan Aset dan Perangkat + Pindai QR
 - T3.3 — Pemantauan Rekap Izin dan Penggantian
 - T3.4 — Pemantauan Honorarium dan Pembayaran
+- current_password
 - T0.0 — (Manual) Lengkapi dan koreksi desain Owner di Stitch
 - T0.1 — Setup Laravel fullstack (Livewire), design tokens, dan pengambilan desain Stitch
 - T0.3 — Hak akses berbasis peran (middleware, Policy, pencatatan akses ditolak)
@@ -99,26 +101,59 @@
 - T2.1 — Kerangka data operasional untuk fitur Owner (kontrak dengan modul Admin)
 - T3.5 — Beranda Owner final, badge menu, Tinjau Persetujuan, dan E2E irisan Owner
 - 3.5 Kebutuhan Fungsional Kurir (KR)
-- tasks/README.md
+- current_password
 - DatabaseSeeder.php
 - Peta Layar Stitch — Irisan Owner
+- NotificationTest.php
+- endpoints
+- endpoints
+- App\Enums\Role
+- AuditLogEndpointTest.php
+- status
+- id
+- date_to
+- status
+- id
+- date_to
+- action
+- actor_id
+- date_from
+- subject_id
+- subject_type
+- action
+- actor_id
+- date_from
+- subject_id
+- subject_type
+- metadata
+- metadata
+- .active
+- headers
+- headers
+- responses
+- responses
+- Tests\TestCase
+- endpoints/02.yaml
+- endpoints.cache/02.yaml
+- auth.md
+- intro.md
 
 ## God Nodes (most connected - your core abstractions)
-1. `3.3 Kebutuhan Fungsional Admin (AD)` - 35 edges
-2. `Role` - 29 edges
-3. `3.2 Modul Administrasi Pembelajaran (ADM)` - 21 edges
-4. `3.4 Kebutuhan Fungsional Tentor (TN)` - 19 edges
-5. `User` - 18 edges
-6. `actingAsRole()` - 16 edges
-7. `AuditLog` - 14 edges
-8. `3.2 Kebutuhan Fungsional Owner (OW)` - 14 edges
-9. `3.1 Ketentuan Umum dan Layanan Bersama` - 14 edges
-10. `3.1 Ketentuan Umum dan Layanan Bersama` - 14 edges
+1. `Role` - 37 edges
+2. `3.3 Kebutuhan Fungsional Admin (AD)` - 35 edges
+3. `User` - 23 edges
+4. `actingAsRole()` - 21 edges
+5. `3.2 Modul Administrasi Pembelajaran (ADM)` - 21 edges
+6. `endpoints` - 19 edges
+7. `endpoints` - 19 edges
+8. `endpoints` - 19 edges
+9. `endpoints` - 19 edges
+10. `endpoints` - 19 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `T0.4 — Notifikasi di dalam sistem (2026-11-25)` --references--> `Recipients`  [INFERRED]
+  docs/PROGRESS.md → app/Domain/Notification/Recipients.php
 - `T0.3 — Riwayat perubahan / audit trail (2026-11-25)` --references--> `LoginUser`  [INFERRED]
-  docs/PROGRESS.md → app/Domain/Auth/Actions/LoginUser.php
-- `Tambahan (di luar daftar task) — UI autentikasi sementara, Blade (2026-11-25)` --references--> `LoginUser`  [INFERRED]
   docs/PROGRESS.md → app/Domain/Auth/Actions/LoginUser.php
 - `T0.2 — Hak akses berbasis peran (2026-11-25)` --references--> `actingAsRole()`  [INFERRED]
   docs/PROGRESS.md → tests/Pest.php
@@ -130,7 +165,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (119 total, 52 thin omitted)
+## Communities (153 total, 54 thin omitted)
 
 ### Community 0 - "composer.json"
 Cohesion: 0.22
@@ -145,11 +180,11 @@ Cohesion: 0.18
 Nodes (7): graphify (CLAUDE.md section), graphify reflect (LESSONS.md), graphify save-result memory step, Log task (WAJIB), python -m graphify invocation, Task log file format (docs/tasks/YYYY-MM-DD-slug.md), Memory: TASK 2026-11-25 Setup graphify knowledge graph
 
 ### Community 3 - "Database Migrations"
-Cohesion: 0.09
-Nodes (13): {closure#1}(), {closure#2}(), {closure#3}(), {closure#1}(), {closure#2}(), {closure#1}(), {closure#2}(), {closure#3}() (+5 more)
+Cohesion: 0.08
+Nodes (14): {closure#1}(), {closure#2}(), {closure#3}(), {closure#1}(), {closure#2}(), {closure#1}(), {closure#2}(), {closure#3}() (+6 more)
 
 ### Community 5 - "Controller"
-Cohesion: 0.21
+Cohesion: 0.17
 Nodes (5): HealthController, Controller, BerandaController, LoginController, PasswordController
 
 ### Community 6 - "Composer Scripts"
@@ -157,20 +192,20 @@ Cohesion: 0.22
 Nodes (9): scripts, dev, post-autoload-dump, post-create-project-cmd, post-root-package-install, post-update-cmd, pre-package-uninstall, setup (+1 more)
 
 ### Community 7 - "bootstrap/app.php"
-Cohesion: 0.13
-Nodes (6): {closure#1}(), {closure#2}(), {closure#5}(), {closure#7}(), {closure#8}(), {closure#9}()
+Cohesion: 0.11
+Nodes (7): {closure#1}(), {closure#2}(), {closure#5}(), {closure#6}(), {closure#7}(), {closure#8}(), {closure#9}()
 
 ### Community 8 - "Composer Plugin Settings"
 Cohesion: 0.29
 Nodes (7): pestphp/pest-plugin, php-http/discovery, config, allow-plugins, optimize-autoloader, preferred-install, sort-packages
 
 ### Community 10 - "LoginTest.php"
-Cohesion: 0.31
-Nodes (8): {closure#10}(), {closure#2}(), {closure#3}(), {closure#5}(), {closure#6}(), {closure#7}(), {closure#8}(), login()
+Cohesion: 0.10
+Nodes (10): {closure#10}(), {closure#10}(), {closure#2}(), {closure#3}(), {closure#5}(), {closure#6}(), {closure#7}(), {closure#8}() (+2 more)
 
-### Community 15 - "1.3 Ruang Lingkup Sistem"
-Cohesion: 0.18
-Nodes (11): 1.1 Latar Belakang, 1.2 Tujuan Penyusunan Dokumen, 1.3.1 Modul Administrasi Pembelajaran, 1.3.2 Modul Izin dan Penggantian Tentor, 1.3.3 Modul Presensi dan Penggajian Tentor IT, 1.3.4 Modul Manajemen Aset dan Ekspedisi, 1.3.5 Modul Pelaporan dan Dashboard serta Pengaturan Sistem, 1.3.6 Integrasi Antarmodul (+3 more)
+### Community 15 - "BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)"
+Cohesion: 0.05
+Nodes (43): 1.1 Latar Belakang, 1.2 Tujuan Penyusunan Dokumen, 1.3.1 Modul Administrasi Pembelajaran, 1.3.2 Modul Izin dan Penggantian Tentor, 1.3.3 Modul Presensi dan Penggajian Tentor IT, 1.3.4 Modul Manajemen Aset dan Ekspedisi, 1.3.5 Modul Pelaporan dan Dashboard serta Pengaturan Sistem, 1.3.6 Integrasi Antarmodul (+35 more)
 
 ### Community 16 - "3.4 Kebutuhan Fungsional Tentor (TN)"
 Cohesion: 0.11
@@ -179,6 +214,10 @@ Nodes (19): 3.4 Kebutuhan Fungsional Tentor (TN), TN-01 \| Pengisian Ketersediaa
 ### Community 23 - "Frontend Design"
 Cohesion: 0.29
 Nodes (6): Design principles, Frontend Design, Ground your designs in the subject matter, More on writing in design, Process: plan, review against the brief, build, critique, Restraint and self-critique
+
+### Community 24 - "endpoints"
+Cohesion: 0.04
+Nodes (45): action, actor_id, date_from, date_to, subject_id, subject_type, description, endpoints (+37 more)
 
 ### Community 25 - "Q: TASK 2026-11-25: Pemetaan dokumen ke graph (/graphify .)"
 Cohesion: 0.40
@@ -212,9 +251,13 @@ Nodes (14): 3.1 Ketentuan Umum dan Layanan Bersama, Istilah Baku, Kode Modul, KU
 Cohesion: 0.14
 Nodes (14): 3.1 Ketentuan Umum dan Layanan Bersama, Istilah Baku, Kode Peran, KU-01 \| Penentuan Jarak Domisili Tentor ke Sekolah, KU-02 \| Pemeriksaan Lokasi Kehadiran dan Serah Terima, KU-03 \| Pemberitahuan, KU-04 \| Lampiran dan Berkas Bukti, KU-05 \| Riwayat Perubahan Data (+6 more)
 
-### Community 36 - "Role"
-Cohesion: 0.07
-Nodes (32): {closure#1}(), {closure#2}(), {closure#3}(), {closure#4}(), {closure#1}(), {closure#10}(), {closure#11}(), {closure#12}() (+24 more)
+### Community 35 - "ApiException"
+Cohesion: 0.23
+Nodes (3): LoginUser, ApiException, T0.2 — Hak akses berbasis peran (2026-11-25)
+
+### Community 36 - "RoleAccessTest.php"
+Cohesion: 0.14
+Nodes (13): {closure#10}(), {closure#11}(), {closure#12}(), {closure#13}(), {closure#3}(), {closure#4}(), {closure#5}(), {closure#6}() (+5 more)
 
 ### Community 38 - "require-dev"
 Cohesion: 0.20
@@ -257,48 +300,56 @@ Cohesion: 0.67
 Nodes (3): extra, laravel, dont-discover
 
 ### Community 75 - "EnsureUserHasRole.php"
-Cohesion: 0.24
-Nodes (3): {closure#1}(), EnsureUserHasRole, RequestId
+Cohesion: 0.20
+Nodes (4): {closure#1}(), EnsureUserHasRole, RequestId, T0.1 — Autentikasi (2026-11-25)
 
 ### Community 76 - "Illuminate\Http\Request"
-Cohesion: 0.26
-Nodes (3): AuditLogResource, UserResource, {closure#6}()
+Cohesion: 0.19
+Nodes (4): AuthController, AuditLogResource, NotificationResource, UserResource
 
-### Community 78 - "Log per task"
-Cohesion: 0.20
-Nodes (9): RecordAccessDenial, Log per task, Progress — Irisan Owner, Ringkasan, T0.1 — Autentikasi (2026-11-25), T0.2 — Hak akses berbasis peran (2026-11-25), T0.3 — Riwayat perubahan / audit trail (2026-11-25), Tambahan (di luar daftar task) — UI autentikasi sementara, Blade (2026-11-25) (+1 more)
+### Community 78 - "EdukomNotification"
+Cohesion: 0.15
+Nodes (7): EdukomNotification, Log per task, Progress — Irisan Owner, Ringkasan, T0.4 — Notifikasi di dalam sistem (2026-11-25), Tambahan (di luar daftar task) — UI autentikasi sementara, Blade (2026-11-25), Templat
 
 ### Community 79 - "AuditTest.php"
 Cohesion: 0.09
 Nodes (8): AccessDenial, AuditLog, auditSample(), {closure#10}(), {closure#11}(), {closure#2}(), {closure#3}(), {closure#6}()
 
+### Community 80 - "endpoints"
+Cohesion: 0.04
+Nodes (45): action, actor_id, date_from, date_to, subject_id, subject_type, description, endpoints (+37 more)
+
 ### Community 81 - "3.2 Kebutuhan Fungsional Owner (OW)"
 Cohesion: 0.14
 Nodes (14): 3.2 Kebutuhan Fungsional Owner (OW), OW-01 \| Penetapan dan Pengelolaan Komponen Honorarium, OW-02 \| Penetapan Parameter Kebijakan Operasional, OW-03 \| Pengelolaan Daftar Alasan Penolakan Izin, OW-04 \| Pemrosesan Izin Mendesak di Luar Jam Layanan Admin, OW-05 \| Keputusan atas Pertemuan tanpa Tentor Pengganti, OW-06 \| Pembukaan Kembali Laporan Pertemuan Terverifikasi, OW-07 \| Persetujuan Honorarium Periode (+6 more)
 
-### Community 82 - "App\Http\Controllers\Api\V1\AuthController"
-Cohesion: 0.24
-Nodes (3): ChangePassword, AuthController, ChangePasswordRequest
+### Community 83 - "LoginRequest"
+Cohesion: 0.19
+Nodes (3): AuditLogIndexRequest, LoginRequest, NotificationIndexRequest
 
 ### Community 84 - ".record"
-Cohesion: 0.22
-Nodes (8): Audit, 1. Kebutuhan SRS v3 yang dipenuhi, 2. Acuan tampilan Stitch, 3. Penjelasan dan prompt untuk agent, 4. Aturan umum (berlaku untuk setiap task), Checklist selesai, OW-14 | Penelusuran Riwayat Perubahan Data, T0.4 — Riwayat perubahan data (audit trail) + halaman Riwayat Perubahan + layanan ekspor
+Cohesion: 0.18
+Nodes (10): RecordAccessDenial, Audit, T0.3 — Riwayat perubahan / audit trail (2026-11-25), 1. Kebutuhan SRS v3 yang dipenuhi, 2. Acuan tampilan Stitch, 3. Penjelasan dan prompt untuk agent, 4. Aturan umum (berlaku untuk setiap task), Checklist selesai (+2 more)
 
 ### Community 85 - "Role"
-Cohesion: 0.22
-Nodes (9): Role, Admin, Kurir, Owner, Teknisi, Tentor, {closure#3}(), {closure#1}() (+1 more)
+Cohesion: 0.24
+Nodes (8): Role, Admin, Kurir, Owner, Teknisi, Tentor, {closure#1}(), {closure#2}()
 
-### Community 86 - "2.3 Karakteristik dan Pemetaan Pengguna"
-Cohesion: 0.18
-Nodes (11): 1. Admin, 2.1 Analisis Sistem Berjalan, 2.2 Analisis Masalah Pokok, 2.3 Karakteristik dan Pemetaan Pengguna, 2.4 Usulan Solusi Arsitektur Sistem Baru (ERP), 2. Tentor, 3. Kurir atau Tim Ekspedisi, 4. Teknisi (+3 more)
+### Community 86 - "endpoints"
+Cohesion: 0.05
+Nodes (42): current_password, email, password, description, endpoints, auth, cleanBodyParameters, cleanQueryParameters (+34 more)
+
+### Community 87 - "endpoints"
+Cohesion: 0.05
+Nodes (42): current_password, email, password, description, endpoints, auth, cleanBodyParameters, cleanQueryParameters (+34 more)
 
 ### Community 88 - "BAB III KEBUTUHAN FUNGSIONAL (USER STORIES)"
-Cohesion: 0.20
-Nodes (9): 3.6 Kebutuhan Fungsional Teknisi (TK), 5.1 Infrastruktur Komponen dan Perangkat Keras, 5.2 Fondasi Arsitektur Perangkat Lunak dan Bahasa Pemrograman, 5.3 Modul Integrasi Pihak Ketiga (Oracles), BAB III KEBUTUHAN FUNGSIONAL (USER STORIES), BAB V ARSITEKTUR DAN LINGKUNGAN TEKNOLOGI, TK-01 \| Melihat Tiket Perbaikan dan Riwayat Perangkat, TK-02 \| Pencatatan Penanganan Perbaikan (+1 more)
+Cohesion: 0.40
+Nodes (5): 3.6 Kebutuhan Fungsional Teknisi (TK), BAB III KEBUTUHAN FUNGSIONAL (USER STORIES), TK-01 \| Melihat Tiket Perbaikan dan Riwayat Perangkat, TK-02 \| Pencatatan Penanganan Perbaikan, TK-03 \| Penyelesaian Perbaikan
 
-### Community 89 - "BAB IV KEBUTUHAN NON-FUNGSIONAL (REKAYASA ARSITEKTURAL)"
-Cohesion: 0.22
-Nodes (9): 4.1 Performa (PRF), 4.2 Keamanan (SEC), 4.3 Keandalan dan Ketersediaan (REL), 4.4 Kapasitas dan Skalabilitas (CAP), 4.5 Integritas dan Audit Data (INT), 4.6 Backup dan Pemulihan (BCK), 4.7 Kompatibilitas dan Usability (USA), 4.8 Pemeliharaan dan Monitoring (MNT) (+1 more)
+### Community 89 - "endpoints"
+Cohesion: 0.05
+Nodes (40): description, endpoints, auth, bodyParameters, cleanBodyParameters, cleanQueryParameters, cleanUrlParameters, controller (+32 more)
 
 ### Community 90 - "T2.5 — Izin Mendesak di luar jam layanan Admin + Keputusan Eskalasi"
 Cohesion: 0.22
@@ -308,9 +359,9 @@ Nodes (8): 1. Kebutuhan SRS v3 yang dipenuhi, 2. Acuan tampilan Stitch, 3. Penje
 Cohesion: 0.22
 Nodes (8): 1. Kebutuhan SRS v3 yang dipenuhi, 2. Acuan tampilan Stitch, 3. Penjelasan dan prompt untuk agent, 4. Aturan umum (berlaku untuk setiap task), Checklist selesai, OW-06 | Pembukaan Kembali Laporan Pertemuan Terverifikasi, OW-10 | Pemantauan Administrasi Pembelajaran, T3.1 — Pemantauan Pembelajaran + Buka Kembali Laporan Terverifikasi
 
-### Community 93 - "LAMPIRAN"
-Cohesion: 0.25
-Nodes (8): LAMPIRAN, Lampiran A \| Matriks Peran, Lampiran B \| Master Status dan Transisi, Lampiran C \| Tabel Keputusan Honorarium, Lampiran D \| Daftar Parameter, Lampiran E \| Daftar Keputusan dan Hal yang Perlu Diisi, Lampiran F \| Pemetaan Kode Lama ke Kode Baru, Lampiran G \| Pemetaan Kode Fungsi Modul ke Kebutuhan Fungsional per Peran
+### Community 93 - "endpoints"
+Cohesion: 0.05
+Nodes (40): description, endpoints, auth, bodyParameters, cleanBodyParameters, cleanQueryParameters, cleanUrlParameters, controller (+32 more)
 
 ### Community 94 - "T0.2 — Autentikasi, layout Owner, profil, dan pengelolaan akun Admin"
 Cohesion: 0.25
@@ -364,9 +415,13 @@ Nodes (7): 1. Kebutuhan SRS v3 yang dipenuhi, 2. Acuan tampilan Stitch, 3. Penje
 Cohesion: 0.25
 Nodes (7): 1. Kebutuhan SRS v3 yang dipenuhi, 2. Acuan tampilan Stitch, 3. Penjelasan dan prompt untuk agent, 4. Aturan umum (berlaku untuk setiap task), Checklist selesai, OW-13 | Pemantauan Honorarium dan Pembayaran, T3.4 — Pemantauan Honorarium dan Pembayaran
 
+### Community 107 - "current_password"
+Cohesion: 0.06
+Nodes (34): current_password, email, password, custom, deprecated, description, enumValues, example (+26 more)
+
 ### Community 108 - "T0.0 — (Manual) Lengkapi dan koreksi desain Owner di Stitch"
-Cohesion: 0.29
-Nodes (6): A. Sidebar Owner (terapkan ke SEMUA layar Owner), B. Koreksi layar yang sudah ada (SRS v3 menang atas desain), C. Layar baru (gaya sama persis dengan layar yang ada), Checklist selesai, D. Penamaan, T0.0 — (Manual) Lengkapi dan koreksi desain Owner di Stitch
+Cohesion: 0.15
+Nodes (11): A. Sidebar Owner (terapkan ke SEMUA layar Owner), B. Koreksi layar yang sudah ada (SRS v3 menang atas desain), C. Layar baru (gaya sama persis dengan layar yang ada), Checklist selesai, D. Penamaan, T0.0 — (Manual) Lengkapi dan koreksi desain Owner di Stitch, Agentic Development, Laracasts (+3 more)
 
 ### Community 109 - "T0.1 — Setup Laravel fullstack (Livewire), design tokens, dan pengambilan desain Stitch"
 Cohesion: 0.29
@@ -396,29 +451,137 @@ Nodes (6): 1. Kebutuhan SRS v3 yang dipenuhi, 2. Acuan tampilan Stitch, 3. Penje
 Cohesion: 0.33
 Nodes (6): 3.5 Kebutuhan Fungsional Kurir (KR), KR-01 \| Melihat Tugas Distribusi, KR-02 \| Serah Terima Pengantaran Perangkat, KR-03 \| Serah Terima Penjemputan Perangkat, KR-04 \| Pelaporan Kendala Perangkat, KR-05 \| Melihat Profil Perangkat melalui Label QR
 
-### Community 116 - "tasks/README.md"
-Cohesion: 0.33
-Nodes (5): Agentic Development, Laracasts, Laravel framework, Laravel Boost, MIT license
+### Community 116 - "current_password"
+Cohesion: 0.06
+Nodes (34): current_password, email, password, custom, deprecated, description, enumValues, example (+26 more)
+
+### Community 119 - "NotificationTest.php"
+Cohesion: 0.18
+Nodes (11): Notifier, {closure#10}(), {closure#11}(), {closure#13}(), {closure#2}(), {closure#3}(), {closure#5}(), {closure#6}() (+3 more)
+
+### Community 120 - "endpoints"
+Cohesion: 0.12
+Nodes (16): status, id, endpoints, auth, cleanBodyParameters, cleanQueryParameters, cleanUrlParameters, controller (+8 more)
+
+### Community 121 - "endpoints"
+Cohesion: 0.12
+Nodes (16): status, id, endpoints, auth, cleanBodyParameters, cleanQueryParameters, cleanUrlParameters, controller (+8 more)
+
+### Community 122 - "App\Enums\Role"
+Cohesion: 0.24
+Nodes (9): {closure#1}(), {closure#2}(), {closure#3}(), {closure#4}(), {closure#1}(), {closure#2}(), {closure#3}(), rolesExcept() (+1 more)
+
+### Community 123 - "AuditLogEndpointTest.php"
+Cohesion: 0.14
+Nodes (11): {closure#1}(), {closure#1}(), {closure#1}(), {closure#1}(), {closure#2}(), {closure#3}(), {closure#5}(), {closure#6}() (+3 more)
+
+### Community 124 - "status"
+Cohesion: 0.17
+Nodes (12): status, bodyParameters, custom, deprecated, description, enumValues, example, exampleWasSpecified (+4 more)
+
+### Community 125 - "id"
+Cohesion: 0.17
+Nodes (12): urlParameters, custom, deprecated, description, enumValues, example, exampleWasSpecified, name (+4 more)
+
+### Community 126 - "date_to"
+Cohesion: 0.17
+Nodes (12): date_to, custom, deprecated, description, enumValues, example, exampleWasSpecified, name (+4 more)
+
+### Community 127 - "status"
+Cohesion: 0.17
+Nodes (12): status, bodyParameters, custom, deprecated, description, enumValues, example, exampleWasSpecified (+4 more)
+
+### Community 128 - "id"
+Cohesion: 0.17
+Nodes (12): urlParameters, custom, deprecated, description, enumValues, example, exampleWasSpecified, name (+4 more)
+
+### Community 129 - "date_to"
+Cohesion: 0.17
+Nodes (12): date_to, custom, deprecated, description, enumValues, example, exampleWasSpecified, name (+4 more)
+
+### Community 130 - "action"
+Cohesion: 0.18
+Nodes (11): custom, deprecated, description, enumValues, example, exampleWasSpecified, name, nullable (+3 more)
+
+### Community 131 - "actor_id"
+Cohesion: 0.18
+Nodes (11): custom, deprecated, description, enumValues, example, exampleWasSpecified, name, nullable (+3 more)
+
+### Community 132 - "date_from"
+Cohesion: 0.18
+Nodes (11): date_from, custom, deprecated, description, enumValues, example, exampleWasSpecified, name (+3 more)
+
+### Community 133 - "subject_id"
+Cohesion: 0.18
+Nodes (11): subject_id, custom, deprecated, description, enumValues, example, exampleWasSpecified, name (+3 more)
+
+### Community 134 - "subject_type"
+Cohesion: 0.18
+Nodes (11): subject_type, custom, deprecated, description, enumValues, example, exampleWasSpecified, name (+3 more)
+
+### Community 135 - "action"
+Cohesion: 0.18
+Nodes (11): custom, deprecated, description, enumValues, example, exampleWasSpecified, name, nullable (+3 more)
+
+### Community 136 - "actor_id"
+Cohesion: 0.18
+Nodes (11): custom, deprecated, description, enumValues, example, exampleWasSpecified, name, nullable (+3 more)
+
+### Community 137 - "date_from"
+Cohesion: 0.18
+Nodes (11): date_from, custom, deprecated, description, enumValues, example, exampleWasSpecified, name (+3 more)
+
+### Community 138 - "subject_id"
+Cohesion: 0.18
+Nodes (11): subject_id, custom, deprecated, description, enumValues, example, exampleWasSpecified, name (+3 more)
+
+### Community 139 - "subject_type"
+Cohesion: 0.18
+Nodes (11): subject_type, custom, deprecated, description, enumValues, example, exampleWasSpecified, name (+3 more)
+
+### Community 140 - "metadata"
+Cohesion: 0.20
+Nodes (10): metadata, authenticated, custom, deprecated, description, groupDescription, groupName, subgroup (+2 more)
+
+### Community 141 - "metadata"
+Cohesion: 0.20
+Nodes (10): metadata, authenticated, custom, deprecated, description, groupDescription, groupName, subgroup (+2 more)
+
+### Community 143 - "headers"
+Cohesion: 0.29
+Nodes (7): headers, Accept, cache-control, Content-Type, vary, x-request-id, headers
+
+### Community 144 - "headers"
+Cohesion: 0.29
+Nodes (7): headers, Accept, cache-control, Content-Type, vary, x-request-id, headers
+
+### Community 145 - "responses"
+Cohesion: 0.40
+Nodes (5): responses, content, custom, description, status
+
+### Community 146 - "responses"
+Cohesion: 0.40
+Nodes (5): responses, content, custom, description, status
 
 ## Knowledge Gaps
 - **12 isolated node(s):** `Admin`, `Kurir`, `Owner`, `Teknisi`, `Tentor` (+7 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 584 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **52 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1103 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **54 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Role` connect `Role` to `SessionTest.php`, `User Model & Seeding`, `UserFactory.php`, `Role`, `Controller`, `LoginUser.php`, `AuthPagesTest.php`, `LoginTest.php`, `DatabaseSeeder.php`, `LoginRequest`?**
-  _High betweenness centrality (0.053) - this node is a cross-community bridge._
+- **Why does `Role` connect `Role` to `SessionTest.php`, `RoleAccessTest.php`, `UserFactory.php`, `Controller`, `LoginUser.php`, `AuthPagesTest.php`, `LoginTest.php`, `.active`, `DatabaseSeeder.php`, `NotificationTest.php`, `App\Enums\Role`, `AuditLogEndpointTest.php`, `LoginRequest`?**
+  _High betweenness centrality (0.018) - this node is a cross-community bridge._
 - **What connects `Admin`, `Kurir`, `Owner` to the rest of the system?**
   _12 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Frontend Build Dependencies` be split into smaller, more focused modules?**
   _Cohesion score 0.1225296442687747 - nodes in this community are weakly interconnected._
-- **Why does `AuditLog` connect `AuditTest.php` to `Role`, `Illuminate\Http\Request`, `.record`, `AuditLogController.php`, `LoginRequest`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+- **Why does `User` connect `User Model & Seeding` to `SessionTest.php`, `UserFactory.php`, `LoginUser.php`, `AuthPagesTest.php`, `LoginTest.php`, `Illuminate\Http\Request`, `.active`, `App\Http\Controllers\Api\V1\AuthController`, `DatabaseSeeder.php`, `NotificationTest.php`, `LoginRequest`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Should `Database Migrations` be split into smaller, more focused modules?**
-  _Cohesion score 0.0915915915915916 - nodes in this community are weakly interconnected._
-- **Why does `{closure#3}()` connect `Role` to `.record`, `Role`?**
-  _High betweenness centrality (0.034) - this node is a cross-community bridge._
+  _Cohesion score 0.08292682926829269 - nodes in this community are weakly interconnected._
 - **Should `bootstrap/app.php` be split into smaller, more focused modules?**
-  _Cohesion score 0.13450292397660818 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.11255411255411256 - nodes in this community are weakly interconnected._
+- **Should `LoginTest.php` be split into smaller, more focused modules?**
+  _Cohesion score 0.10333333333333333 - nodes in this community are weakly interconnected._

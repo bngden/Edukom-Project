@@ -11,7 +11,7 @@ Diperbarui oleh agent di akhir setiap task. Manusia memeriksa dan mengubah statu
 | T0.1 | Autentikasi (Laravel sudah terpasang) | 🟡 | feat/t0-1-autentikasi | 2026-11-25 | Menunggu review; 24 test lulus |
 | T0.2 | Hak akses berbasis peran | 🟡 | feat/t0-2-hak-akses | 2026-11-25 | Menunggu review; 21 test baru lulus |
 | T0.3 | Riwayat perubahan (audit trail) | 🟡 | feat/t0-3-audit-trail | 2026-11-25 | Menunggu review; 16 test baru lulus |
-| T0.4 | Notifikasi di dalam sistem | ⬜ | | | |
+| T0.4 | Notifikasi di dalam sistem | 🟡 | feat/t0-4-notifikasi | 2026-11-25 | Menunggu review; 13 test baru lulus |
 | T0.5 | Periode penggajian (minimal) dan pola data berversi | ⬜ | | | |
 | T1.1 | Parameter kebijakan berversi (OW-02, AD-27) | ⬜ | | | |
 | T1.2 | Komponen honorarium dan tarif berversi (OW-01, AD-27) | ⬜ | | | |
@@ -29,6 +29,20 @@ Diperbarui oleh agent di akhir setiap task. Manusia memeriksa dan mengubah statu
 ## Log per task
 
 <!-- Salin templat di bawah untuk setiap task yang selesai. Terbaru di atas. -->
+
+### T0.4 — Notifikasi di dalam sistem (2026-11-25)
+- **Branch:** feat/t0-4-notifikasi (dari feat/t0-3-audit-trail)
+- **Acuan:** task lama `T0.4-notifikasi.md` (skema API) + helper `Recipients` dari T0.5 SRS v3. Lonceng/panel Livewire dan `export.ready` tidak dikerjakan.
+- **Ringkasan perubahan:** tabel `notifications` bawaan Laravel; `EdukomNotification` (channel database, payload event/title/message/subject_type/subject_id/action_url; kolom `type` berisi kode event); `Notifier::send` (afterCommit, gagal → log warning); `Recipients::owners()/admins()`; 4 endpoint notifikasi milik sendiri; anotasi Scribe `@group` untuk notifikasi dan riwayat perubahan.
+- **File/migration utama:** `2026_11_25_134017_create_notifications_table`; `app/Notifications/EdukomNotification.php`; `app/Domain/Notification/{Notifier,Recipients}.php`; `app/Http/Controllers/Api/V1/NotificationController.php`; `app/Http/Requests/Api/V1/NotificationIndexRequest.php`; `app/Http/Resources/V1/NotificationResource.php`; `routes/api.php`; `CLAUDE.md` (bagian "Notifikasi").
+- **Endpoint baru:** `GET /api/v1/notifications`, `GET /api/v1/notifications/unread-count`, `POST /api/v1/notifications/{id}/read`, `POST /api/v1/notifications/read-all`.
+- **Test:** 13 test baru lulus (`tests/Feature/Notification/NotificationTest.php`).
+- **Asumsi yang diambil:**
+  - Notifikasi dikirim sinkron (tanpa antrean) setelah commit; cukup untuk jumlah penerima yang kecil (1 Owner, 1 Admin).
+  - Tandai dibaca mengembalikan 204; menandai notifikasi yang sudah dibaca tetap 204.
+  - Daftar kode event dibuat di task pemicunya (belum ada konstanta).
+- **Perlu dikonfirmasi:** —
+- **Catatan untuk task berikutnya:** panggil `Notifier::send(Recipients::owners(), new EdukomNotification(...))` di Action pemicu.
 
 ### T0.3 — Riwayat perubahan / audit trail (2026-11-25)
 - **Branch:** feat/t0-3-audit-trail (dari feat/t0-2-hak-akses)

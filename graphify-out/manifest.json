@@ -12,9 +12,9 @@
     "semantic_hash": "25a307335c0719bc9a91b3f7babd186d"
   },
   "app/Models/User.php": {
-    "mtime": 1795547602.065834,
-    "seen": 1795548159.494135,
-    "ast_hash": "e20b5c58fbe298e5045067d57e4e0d3e",
+    "mtime": 1795589052.3765285,
+    "seen": 1795589635.9591925,
+    "ast_hash": "54557c7e6fcce6c1a48e11001769e156",
     "semantic_hash": ""
   },
   "app/Providers/AppServiceProvider.php": {
@@ -186,9 +186,9 @@
     "semantic_hash": "60c40741a9c5b915a5e5542cfb23bc25"
   },
   "CLAUDE.md": {
-    "mtime": 1795587922.3056679,
-    "seen": 1795588479.4346209,
-    "ast_hash": "9d8421b57d241c81abe582674421708f",
+    "mtime": 1795589027.0057995,
+    "seen": 1795589635.9591925,
+    "ast_hash": "b8a5cb125782cf0b811cd8705df27d46",
     "semantic_hash": ""
   },
   "README.md": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "routes/api.php": {
-    "mtime": 1795587994.5828066,
-    "seen": 1795588479.4346209,
-    "ast_hash": "936515a5661d3fb0a1e738cbe50b380e",
+    "mtime": 1795588843.535159,
+    "seen": 1795589635.9591925,
+    "ast_hash": "3547cf5e537aaa82f23c41b938010d12",
     "semantic_hash": ""
   },
   "tests/Feature/Api/V1/Auth/LoginTest.php": {
@@ -420,9 +420,9 @@
     "semantic_hash": ""
   },
   "docs/PROGRESS.md": {
-    "mtime": 1795587936.918497,
-    "seen": 1795588479.4346209,
-    "ast_hash": "5af45b61ac3bde8897ee54b92a796e16",
+    "mtime": 1795589027.3323636,
+    "seen": 1795589635.9591925,
+    "ast_hash": "2f70e021c5cdb3abaa95b66320d8ba78",
     "semantic_hash": ""
   },
   "docs/TASK_OWNER.md": {
@@ -708,9 +708,9 @@
     "semantic_hash": ""
   },
   "app/Http/Controllers/Api/V1/AuditLogController.php": {
-    "mtime": 1795587994.7650337,
-    "seen": 1795588479.4346209,
-    "ast_hash": "8be727ffa93db7413c070baf7a0645a2",
+    "mtime": 1795588863.0369303,
+    "seen": 1795589635.9591925,
+    "ast_hash": "ebe18159348033c89867d99023aec255",
     "semantic_hash": ""
   },
   "app/Http/Requests/Api/V1/AuditLogIndexRequest.php": {
@@ -879,6 +879,126 @@
     "mtime": 1795587122.4384522,
     "seen": 1795588479.4346209,
     "ast_hash": "791e4adae55761b96451aa1840af212e",
+    "semantic_hash": ""
+  },
+  ".scribe/endpoints.cache/00.yaml": {
+    "mtime": 1795589629.0905397,
+    "seen": 1795589635.9591925,
+    "ast_hash": "6bcde1400066bfaf5dd0403d7a6bd3f7",
+    "semantic_hash": ""
+  },
+  ".scribe/endpoints.cache/01.yaml": {
+    "mtime": 1795589629.094074,
+    "seen": 1795589635.9591925,
+    "ast_hash": "942982558bd74c6f061ec40ae7597dd4",
+    "semantic_hash": ""
+  },
+  ".scribe/endpoints.cache/02.yaml": {
+    "mtime": 1795589629.0961027,
+    "seen": 1795589635.9591925,
+    "ast_hash": "fefee2f662ae58553d036983af499351",
+    "semantic_hash": ""
+  },
+  ".scribe/endpoints.cache/03.yaml": {
+    "mtime": 1795589629.0991328,
+    "seen": 1795589635.9591925,
+    "ast_hash": "5e41ca957a5a78b81fa2f8c08a44fbd7",
+    "semantic_hash": ""
+  },
+  ".scribe/endpoints/00.yaml": {
+    "mtime": 1795589629.0894983,
+    "seen": 1795589635.9591925,
+    "ast_hash": "f692f7aafa9a633e5d9bd6fe5f574a86",
+    "semantic_hash": ""
+  },
+  ".scribe/endpoints/01.yaml": {
+    "mtime": 1795589629.0925646,
+    "seen": 1795589635.9591925,
+    "ast_hash": "c4c836ae479a9aa61c3a7b87de50e625",
+    "semantic_hash": ""
+  },
+  ".scribe/endpoints/02.yaml": {
+    "mtime": 1795589629.0961027,
+    "seen": 1795589635.9591925,
+    "ast_hash": "f3f1d657c16a792136b9d67ff328cdea",
+    "semantic_hash": ""
+  },
+  ".scribe/endpoints/03.yaml": {
+    "mtime": 1795589629.0981183,
+    "seen": 1795589635.9591925,
+    "ast_hash": "43a2bc468930434db2dd98f849402d8c",
+    "semantic_hash": ""
+  },
+  ".scribe/endpoints/custom.0.yaml": {
+    "mtime": 1795589629.3793602,
+    "seen": 1795589635.9591925,
+    "ast_hash": "0b4f7bbd014418fe826e84e82ebc074b",
+    "semantic_hash": ""
+  },
+  "app/Domain/Notification/Notifier.php": {
+    "mtime": 1795588841.882241,
+    "seen": 1795589635.9591925,
+    "ast_hash": "e0eb937c31c208a540d4d0c63b33e902",
+    "semantic_hash": ""
+  },
+  "app/Domain/Notification/Recipients.php": {
+    "mtime": 1795589052.4734693,
+    "seen": 1795589635.9591925,
+    "ast_hash": "a314a01aa8cb74805df72e7552cdd827",
+    "semantic_hash": ""
+  },
+  "app/Http/Controllers/Api/V1/NotificationController.php": {
+    "mtime": 1795589052.9427526,
+    "seen": 1795589635.9591925,
+    "ast_hash": "2960284602c82bc8d5cdcfc307525e66",
+    "semantic_hash": ""
+  },
+  "app/Http/Requests/Api/V1/NotificationIndexRequest.php": {
+    "mtime": 1795588842.5615866,
+    "seen": 1795589635.9591925,
+    "ast_hash": "fe26fd4782aa0adda02f0c933cb8d2a3",
+    "semantic_hash": ""
+  },
+  "app/Http/Resources/V1/NotificationResource.php": {
+    "mtime": 1795589053.0756767,
+    "seen": 1795589635.9591925,
+    "ast_hash": "d350e6bc5ed2983b674827f027d98af5",
+    "semantic_hash": ""
+  },
+  "app/Notifications/EdukomNotification.php": {
+    "mtime": 1795588841.7886212,
+    "seen": 1795589635.9591925,
+    "ast_hash": "7949ad87fbb412c7fb88ae2ae7694eef",
+    "semantic_hash": ""
+  },
+  "database/migrations/2026_11_25_134017_create_notifications_table.php": {
+    "mtime": 1795589057.6854742,
+    "seen": 1795589635.9591925,
+    "ast_hash": "c04b173477002eee1fd9c81373a4c262",
+    "semantic_hash": ""
+  },
+  "resources/views/scribe/index.blade.php": {
+    "mtime": 1795589630.7692516,
+    "seen": 1795589635.9591925,
+    "ast_hash": "b1026eba886f84c60b4b25e371498ddf",
+    "semantic_hash": ""
+  },
+  "tests/Feature/Notification/NotificationTest.php": {
+    "mtime": 1795588868.7109854,
+    "seen": 1795589635.9591925,
+    "ast_hash": "c88db3626e1545285e3456b101cec93f",
+    "semantic_hash": ""
+  },
+  ".scribe/auth.md": {
+    "mtime": 1795589629.3198054,
+    "seen": 1795589635.9591925,
+    "ast_hash": "9bee2b1ef8a238b2e58613fa636d5f39",
+    "semantic_hash": ""
+  },
+  ".scribe/intro.md": {
+    "mtime": 1795589629.289541,
+    "seen": 1795589635.9591925,
+    "ast_hash": "4bf90470e636417926ae5d9227747d45",
     "semantic_hash": ""
   },
   "package-lock.json": {

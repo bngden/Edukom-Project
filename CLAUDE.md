@@ -104,3 +104,13 @@ it('menolak role selain owner', function (Role $role) {
 - Sudah tercatat otomatis: `access.denied` (setiap 403 otorisasi), `auth.account_locked`, `audit.purged`.
 - API: `GET /api/v1/audit-logs` (owner, admin), filter `subject_type`, `subject_id`, `actor_id`, `action`,
   `date_from`, `date_to` (YYYY-MM-DD), 25 per halaman, terbaru dulu.
+
+## Notifikasi
+
+- Kirim lewat `App\Domain\Notification\Notifier::send($users, new EdukomNotification(event: 'procurement.submitted',
+  title: ..., message: ..., subjectType: ..., subjectId: ..., actionUrl: '/owner/pengadaan/12'))`. Boleh dipanggil di
+  dalam transaksi: notifikasi baru dikirim setelah commit, dan kegagalan kirim hanya dicatat di log (proses pemicu tetap sukses).
+- Penerima umum: `Recipients::owners()`, `Recipients::admins()` (user aktif saja).
+- Kode event ditulis di task yang membuat pemicunya. Jangan memuat data kesehatan atau data pribadi yang tidak perlu.
+- API (semua peran login, hanya milik sendiri; milik user lain → 404): `GET /api/v1/notifications?status=unread|read|all`
+  (20 per halaman), `GET /notifications/unread-count`, `POST /notifications/{id}/read`, `POST /notifications/read-all`.

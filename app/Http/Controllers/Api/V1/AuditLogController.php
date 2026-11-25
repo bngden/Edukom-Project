@@ -10,10 +10,15 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 
+/**
+ * @group Riwayat Perubahan
+ */
 class AuditLogController extends Controller
 {
     /**
-     * Riwayat perubahan (Owner, Admin). Terbaru dulu, 25 per halaman.
+     * Daftar riwayat perubahan
+     *
+     * Hanya Owner dan Admin. Terbaru dulu, 25 per halaman.
      */
     public function index(AuditLogIndexRequest $request): AnonymousResourceCollection
     {
