@@ -27,9 +27,20 @@ class ApiException extends RuntimeException
         return new self($message, $code, 403);
     }
 
-    public static function locked(string $message, string $code = 'LOCKED'): self
+    /**
+     * @param  array<string, list<string>>  $errors
+     */
+    public static function locked(string $message, string $code = 'LOCKED', array $errors = []): self
     {
-        return new self($message, $code, 423);
+        return new self($message, $code, 423, $errors);
+    }
+
+    /**
+     * @param  array<string, list<string>>  $errors
+     */
+    public static function conflict(string $message, array $errors = []): self
+    {
+        return new self($message, 'CONFLICT', 409, $errors);
     }
 
     /**

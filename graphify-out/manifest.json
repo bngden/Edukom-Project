@@ -18,9 +18,9 @@
     "semantic_hash": ""
   },
   "app/Providers/AppServiceProvider.php": {
-    "mtime": 1795547633.5176258,
-    "seen": 1795548159.494135,
-    "ast_hash": "8b51928d20a750f342ebf41cf0f16315",
+    "mtime": 1795590366.3255708,
+    "seen": 1795591046.3142002,
+    "ast_hash": "1a5d5b60fb7f2f0522e2e949224bddd9",
     "semantic_hash": ""
   },
   "artisan": {
@@ -168,10 +168,10 @@
     "semantic_hash": ""
   },
   "tests/TestCase.php": {
-    "mtime": 1773754980.0,
-    "seen": 1795545039.524944,
-    "ast_hash": "7e567dc27e68d5b57bae16af07f68907",
-    "semantic_hash": "7e567dc27e68d5b57bae16af07f68907"
+    "mtime": 1795590078.645427,
+    "seen": 1795591046.3147058,
+    "ast_hash": "bcee55331d9c08eae239f62310af0327",
+    "semantic_hash": ""
   },
   "tests/Unit/ExampleTest.php": {
     "mtime": 1773754980.0,
@@ -186,9 +186,9 @@
     "semantic_hash": "60c40741a9c5b915a5e5542cfb23bc25"
   },
   "CLAUDE.md": {
-    "mtime": 1795589027.0057995,
-    "seen": 1795589635.9591925,
-    "ast_hash": "b8a5cb125782cf0b811cd8705df27d46",
+    "mtime": 1795590294.198485,
+    "seen": 1795591046.3147058,
+    "ast_hash": "c45aa16063ac13f53cf0484b1c5f0d50",
     "semantic_hash": ""
   },
   "README.md": {
@@ -240,9 +240,9 @@
     "semantic_hash": ""
   },
   "app/Exceptions/ApiException.php": {
-    "mtime": 1795547564.6842258,
-    "seen": 1795548159.494135,
-    "ast_hash": "588ee4a39b0bbb4dbf788b712bcd6a1c",
+    "mtime": 1795590365.9083652,
+    "seen": 1795591046.3142002,
+    "ast_hash": "028163e74d11337cabb8ee5d439c3041",
     "semantic_hash": ""
   },
   "app/Http/Controllers/Api/V1/AuthController.php": {
@@ -420,9 +420,9 @@
     "semantic_hash": ""
   },
   "docs/PROGRESS.md": {
-    "mtime": 1795589027.3323636,
-    "seen": 1795589635.9591925,
-    "ast_hash": "2f70e021c5cdb3abaa95b66320d8ba78",
+    "mtime": 1795590294.4613636,
+    "seen": 1795591046.3147058,
+    "ast_hash": "3a969633baccdbfc72da5daa948aa43a",
     "semantic_hash": ""
   },
   "docs/TASK_OWNER.md": {
@@ -999,6 +999,72 @@
     "mtime": 1795589629.289541,
     "seen": 1795589635.9591925,
     "ast_hash": "4bf90470e636417926ae5d9227747d45",
+    "semantic_hash": ""
+  },
+  "app/Domain/Payroll/PeriodGuard.php": {
+    "mtime": 1795590366.1110287,
+    "seen": 1795591046.3142002,
+    "ast_hash": "c6bb4df899edf6949e560240d8dff32d",
+    "semantic_hash": ""
+  },
+  "app/Domain/Versioning/HasEffectiveDating.php": {
+    "mtime": 1795590366.2716296,
+    "seen": 1795591046.3142002,
+    "ast_hash": "19818761e224e1ff6aa6a0cbe8fd1d70",
+    "semantic_hash": ""
+  },
+  "app/Domain/Versioning/VersionTimeline.php": {
+    "mtime": 1795590366.2195592,
+    "seen": 1795591046.3142002,
+    "ast_hash": "81cab88fe80c67cc9dfaced4800af328",
+    "semantic_hash": ""
+  },
+  "app/Enums/PayrollPeriodStatus.php": {
+    "mtime": 1795590014.3972256,
+    "seen": 1795591046.3142002,
+    "ast_hash": "95a87918a0cc2882e9f83d7cbba93f26",
+    "semantic_hash": ""
+  },
+  "app/Enums/VersionStatus.php": {
+    "mtime": 1795590014.4723597,
+    "seen": 1795591046.3142002,
+    "ast_hash": "e79da7fae9e6a64d5b3b337f5c3f8f1f",
+    "semantic_hash": ""
+  },
+  "app/Models/PayrollPeriod.php": {
+    "mtime": 1795590014.6679785,
+    "seen": 1795591046.3142002,
+    "ast_hash": "b53fe0b50a67a81375f401be74166e78",
+    "semantic_hash": ""
+  },
+  "database/factories/PayrollPeriodFactory.php": {
+    "mtime": 1795590372.3606057,
+    "seen": 1795591046.3142002,
+    "ast_hash": "defa6e5c972e3250c413793e9f8db756",
+    "semantic_hash": ""
+  },
+  "database/migrations/2026_11_25_000004_create_payroll_periods_table.php": {
+    "mtime": 1795590014.3312962,
+    "seen": 1795591046.3142002,
+    "ast_hash": "079ce2efc7b303aafbbefb8e58f47634",
+    "semantic_hash": ""
+  },
+  "tests/Feature/Versioning/VersionTimelineTest.php": {
+    "mtime": 1795590112.8558185,
+    "seen": 1795591046.3147058,
+    "ast_hash": "db8619115877b0e23ef6f366d45bb4f9",
+    "semantic_hash": ""
+  },
+  "tests/Fixtures/TestVersion.php": {
+    "mtime": 1795590078.4383194,
+    "seen": 1795591046.3147058,
+    "ast_hash": "8cd131c5f0575d24e48c3a652da1e356",
+    "semantic_hash": ""
+  },
+  "tests/database/migrations/2026_11_25_900000_create_test_versions_table.php": {
+    "mtime": 1795590078.36439,
+    "seen": 1795591046.3147058,
+    "ast_hash": "dc531a73df81b415dc33a59ed59606ff",
     "semantic_hash": ""
   },
   "package-lock.json": {

@@ -12,7 +12,7 @@ Diperbarui oleh agent di akhir setiap task. Manusia memeriksa dan mengubah statu
 | T0.2 | Hak akses berbasis peran | 🟡 | feat/t0-2-hak-akses | 2026-11-25 | Menunggu review; 21 test baru lulus |
 | T0.3 | Riwayat perubahan (audit trail) | 🟡 | feat/t0-3-audit-trail | 2026-11-25 | Menunggu review; 16 test baru lulus |
 | T0.4 | Notifikasi di dalam sistem | 🟡 | feat/t0-4-notifikasi | 2026-11-25 | Menunggu review; 13 test baru lulus |
-| T0.5 | Periode penggajian (minimal) dan pola data berversi | ⬜ | | | |
+| T0.5 | Periode penggajian (minimal) dan pola data berversi | 🟡 | feat/t0-5-periode-versi | 2026-11-25 | Menunggu review; 10 test baru lulus |
 | T1.1 | Parameter kebijakan berversi (OW-02, AD-27) | ⬜ | | | |
 | T1.2 | Komponen honorarium dan tarif berversi (OW-01, AD-27) | ⬜ | | | |
 | T1.3 | Tingkatan jarak uang transportasi (OW-01.4) | ⬜ | | | |
@@ -29,6 +29,23 @@ Diperbarui oleh agent di akhir setiap task. Manusia memeriksa dan mengubah statu
 ## Log per task
 
 <!-- Salin templat di bawah untuk setiap task yang selesai. Terbaru di atas. -->
+
+### T0.5 — Periode penggajian dan data berversi (2026-11-25)
+- **Branch:** feat/t0-5-periode-versi (dari feat/t0-4-notifikasi)
+- **Acuan:** task lama `T0.5-periode-dan-data-berversi.md` (setara T0.6 SRS v3, tanpa Bagian C komponen Livewire).
+- **Ringkasan perubahan:** tabel `payroll_periods` + enum `PayrollPeriodStatus` (label Indonesia) + factory `month()/closed()/approved()`; `PeriodGuard` (423 `LOCKED_PERIOD`); macro migration `$table->effectiveDating()`; trait `HasEffectiveDating` (scope `activeOn`, `versionStatus()`, wajib `versionSeries()`); enum `VersionStatus`; `VersionTimeline::add/cancel` (transaksi + kunci baris + audit).
+- **File/migration utama:** `2026_11_25_000004_create_payroll_periods_table`; `app/Enums/{PayrollPeriodStatus,VersionStatus}.php`; `app/Models/PayrollPeriod.php`; `database/factories/PayrollPeriodFactory.php`; `app/Domain/Payroll/PeriodGuard.php`; `app/Domain/Versioning/{HasEffectiveDating,VersionTimeline}.php`; `app/Providers/AppServiceProvider.php` (macro); `tests/TestCase.php`, `tests/database/migrations/*`, `tests/Fixtures/TestVersion.php`.
+- **Endpoint baru:** tidak ada.
+- **Test:** 10 test baru lulus (`tests/Feature/Versioning/VersionTimelineTest.php`).
+- **Asumsi yang diambil:**
+  - Bulan tanpa baris periode dianggap terbuka. Periode dicari lewat `(year, month)` dari tanggal.
+  - Tanggal ≤ versi terakhir → 409 `CONFLICT` (pesan menyebut tanggal versi terakhir, format "1 Desember 2026"); pembatalan tidak sah (sudah berlaku, bukan versi terakhir, sudah batal) → 409; alasan kosong → 422.
+  - `created_by` boleh kosong (nilai bawaan dari seeder/command dicatat sebagai sistem).
+  - Audit `version_created` menyimpan seluruh atribut versi baru; penutupan H-1 versi lama tidak dicatat terpisah.
+- **Perlu dikonfirmasi:**
+  - Tabel test `test_versions` ikut terbuat di `db_edukom` saat test dijalankan (DB dev = DB test). Tidak dipakai aplikasi.
+  - Service `Periods::current()/next()/forDate()` (T0.6 SRS v3) belum dibuat; ditambah saat ada pemakainya.
+- **Catatan untuk task berikutnya:** T1.1–T1.3 cukup membuat tabel dengan `effectiveDating()`, model dengan `HasEffectiveDating` + `versionSeries()`, lalu memanggil `VersionTimeline` dari Action.
 
 ### T0.4 — Notifikasi di dalam sistem (2026-11-25)
 - **Branch:** feat/t0-4-notifikasi (dari feat/t0-3-audit-trail)

@@ -114,3 +114,20 @@ it('menolak role selain owner', function (Role $role) {
 - Kode event ditulis di task yang membuat pemicunya. Jangan memuat data kesehatan atau data pribadi yang tidak perlu.
 - API (semua peran login, hanya milik sendiri; milik user lain → 404): `GET /api/v1/notifications?status=unread|read|all`
   (20 per halaman), `GET /notifications/unread-count`, `POST /notifications/{id}/read`, `POST /notifications/read-all`.
+
+## Data berversi
+
+- Nilai kebijakan (parameter, tarif, tingkatan jarak) disimpan sebagai versi dengan tanggal berlaku, tidak pernah ditimpa.
+- Tabel versi: `$table->effectiveDating();` (kolom `effective_from`, `effective_to`, `reason`, `created_by`,
+  `cancelled_at`, `cancelled_by`, `cancel_reason`) + indeks `(kolom deret, effective_from)`.
+- Model: `use HasEffectiveDating;` dan definisikan `versionSeries()` = query versi sejenis, misalnya
+  `static::query()->where('key', $this->key)`. Versi aktif: `->activeOn($tanggal)`; status: `$v->versionStatus()`
+  (Terjadwal, Berlaku, Berakhir, Dibatalkan).
+- Tambah versi hanya lewat `VersionTimeline::add(new Model([... 'effective_from' => ...]), $alasan)`: menolak tanggal
+  di periode terkunci (423 `LOCKED_PERIOD`) dan tanggal ≤ versi terakhir (409), menutup versi sebelumnya H-1,
+  mencatat audit `<model>.version_created`.
+- Batalkan lewat `VersionTimeline::cancel($versi, $alasan)`: hanya versi terakhir yang belum berlaku; versi sebelumnya
+  kembali tanpa tanggal akhir; audit `<model>.version_cancelled`.
+- Periode penggajian: `PayrollPeriod` (satu bulan kalender). `PeriodGuard::isLocked($tanggal)` /
+  `assertNotLocked($tanggal, $field)`; bulan tanpa periode dianggap terbuka.
+- Test memakai model contoh `Tests\Fixtures\TestVersion` (tabel dari `tests/database/migrations`, dimuat oleh `tests/TestCase.php`).
