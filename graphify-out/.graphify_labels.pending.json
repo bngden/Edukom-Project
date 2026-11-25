@@ -57,5 +57,11 @@
   "71": "field.blade.php",
   "72": "icon.blade.php",
   "73": "app.blade.php",
-  "74": "base.blade.php"
+  "74": "base.blade.php",
+  "75": "EnsureUserHasRole.php",
+  "76": "Illuminate\\Http\\Request",
+  "77": "AppServiceProvider.php",
+  "78": "Log per task",
+  "79": "AccessDenial",
+  "80": "RecordAccessDenial.php"
 }

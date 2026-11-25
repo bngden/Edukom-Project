@@ -9,7 +9,7 @@ Diperbarui oleh agent di akhir setiap task. Manusia memeriksa dan mengubah statu
 | Task | Judul | Status | Branch | Selesai | Catatan singkat |
 |---|---|---|---|---|---|
 | T0.1 | Autentikasi (Laravel sudah terpasang) | 🟡 | feat/t0-1-autentikasi | 2026-11-25 | Menunggu review; 24 test lulus |
-| T0.2 | Hak akses berbasis peran | ⬜ | | | |
+| T0.2 | Hak akses berbasis peran | 🟡 | feat/t0-2-hak-akses | 2026-11-25 | Menunggu review; 21 test baru lulus |
 | T0.3 | Riwayat perubahan (audit trail) | ⬜ | | | |
 | T0.4 | Notifikasi di dalam sistem | ⬜ | | | |
 | T0.5 | Periode penggajian (minimal) dan pola data berversi | ⬜ | | | |
@@ -29,6 +29,22 @@ Diperbarui oleh agent di akhir setiap task. Manusia memeriksa dan mengubah statu
 ## Log per task
 
 <!-- Salin templat di bawah untuk setiap task yang selesai. Terbaru di atas. -->
+
+### T0.2 — Hak akses berbasis peran (2026-11-25)
+- **Branch:** feat/t0-2-hak-akses (dari feat/ui-autentikasi, karena T0.1 dan UI login belum di-merge ke main)
+- **Ringkasan perubahan:** middleware alias `role` (`role:owner,admin`): belum login → 401, peran tidak cocok → 403 `FORBIDDEN`, nama peran salah ketik → exception. Semua 403 dari middleware `role` dan Policy/Gate dicatat ke `access_denials` lewat satu callback di penangan exception. Tidak ada `Gate::before` (Owner tidak otomatis boleh semua hal). Helper test `actingAsRole()` dan `rolesExcept()`, dataset Pest `all_roles`, `all_roles_except_owner`, `all_roles_except_owner_admin`.
+- **File/migration utama:** `2026_11_25_000002_create_access_denials_table` (id, user_id null, role, method, path, route_name, ip, occurred_at DATETIME(6); indeks occurred_at dan user_id); `app/Models/AccessDenial.php`; `app/Domain/Access/Actions/RecordAccessDenial.php`; `app/Http/Middleware/EnsureUserHasRole.php`; `bootstrap/app.php`; `tests/Pest.php`; `tests/Datasets/Roles.php`; `tests/Feature/Access/RoleAccessTest.php`; `tests/Unit/RolesDatasetTest.php`; `CLAUDE.md` (bagian "Hak akses").
+- **Endpoint baru:** tidak ada (route dummy hanya didaftarkan di dalam test).
+- **Test:** 21 test baru lulus (132 assertion); Pint lulus.
+- **Asumsi yang diambil:**
+  - Yang dicatat hanya penolakan otorisasi (`AuthorizationException` dari middleware/Policy/Gate, yang diubah Laravel menjadi `AccessDeniedHttpException`). Galat bisnis 403 (`ApiException::forbidden`, misalnya `ACCOUNT_INACTIVE` saat login) dan `abort(403)` tidak dicatat.
+  - Bila penulisan `access_denials` gagal, kegagalan dicatat di log dan respons tetap 403 (tidak berubah jadi 500).
+  - 403 pada halaman web (Blade) juga dicatat dengan cara yang sama.
+  - Path disimpan dengan awalan `/` tanpa query string.
+- **Perlu dikonfirmasi (pindahkan ke DECISIONS.md bila sudah dijawab):**
+  - Pengguna yang dinonaktifkan saat masih login belum otomatis diputus sesinya (atas keputusan user, tidak dikerjakan di T0.2).
+  - Matriks peran rinci per endpoint (SEC-04: "menunggu K1, Q8") diterapkan per task fitur.
+- **Catatan untuk task berikutnya:** T0.3 menambahkan pencatatan audit `access.denied` di `RecordAccessDenial::handle()`. Setiap feature test endpoint memakai `actingAsRole()` dan dataset peran untuk menguji akses semua peran.
 
 ### Tambahan (di luar daftar task) — UI autentikasi sementara, Blade (2026-11-25)
 - **Branch:** feat/ui-autentikasi (dari feat/t0-1-autentikasi)

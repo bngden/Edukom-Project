@@ -1,6 +1,8 @@
 <?php
 
+use App\Domain\Access\Actions\RecordAccessDenial;
 use App\Exceptions\ApiException;
+use App\Http\Middleware\EnsureUserHasRole;
 use App\Http\Middleware\RequestId;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
@@ -13,6 +15,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 /**
@@ -38,6 +41,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->prepend(RequestId::class);
         $middleware->statefulApi();
+        $middleware->alias(['role' => EnsureUserHasRole::class]);
         $middleware->redirectGuestsTo(fn () => route('login'));
         $middleware->redirectUsersTo(fn () => route('beranda'));
     })
@@ -48,6 +52,14 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // Galat bisnis (salah password, akun terkunci, dsb.) bukan error aplikasi; jangan masuk laravel.log.
         $exceptions->dontReport([ApiException::class]);
+
+        // AuthorizationException dari middleware role maupun Policy/Gate sudah diubah Laravel menjadi
+        // AccessDeniedHttpException sebelum callback ini. Galat bisnis 403 (ApiException) tidak dicatat.
+        $exceptions->render(function (AccessDeniedHttpException $e, Request $request) {
+            app(RecordAccessDenial::class)->handle($request);
+
+            return null;
+        });
 
         $exceptions->render(function (ThrottleRequestsException $e, Request $request) use ($isApi) {
             if ($isApi($request) || ! $request->routeIs('login.store')) {

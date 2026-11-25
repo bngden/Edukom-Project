@@ -66,3 +66,25 @@ Desain Stitch hanya acuan tampilan, bukan acuan aturan bisnis.
 Catatan:
 - Query harus terparsial: jangan `Model::all()` / `get()` tanpa batas; pakai paginasi/`chunk`/`lazy`, pilih kolom yang perlu, eager load, dan indeks untuk kolom filter.
 - Feature test API mengirim `spaHeaders()` (Referer `http://localhost`) agar Sanctum memakai sesi.
+
+## Hak akses
+
+- Setiap route API yang dilindungi memakai `auth:sanctum` lalu `role:<peran,...>`, misalnya
+  `Route::middleware(['auth:sanctum', 'role:owner,admin'])`. Nilai peran sama dengan `App\Enums\Role`
+  (`owner`, `admin`, `tentor`, `kurir`, `teknisi`). Bila nama peran salah ketik, aplikasi langsung melempar exception.
+- Belum login → 401 `UNAUTHENTICATED`. Peran tidak cocok → 403 `FORBIDDEN`.
+- Pembatasan per objek (data milik sendiri, SEC-05) memakai Policy/Gate (`Gate::authorize`, `$this->authorize`).
+- **Tidak ada `Gate::before`.** Owner tidak otomatis boleh melakukan semua hal; setiap kemampuan Owner harus diatur jelas.
+- Setiap 403 dari middleware `role` atau Policy/Gate dicatat otomatis ke tabel `access_denials`
+  (`App\Domain\Access\Actions\RecordAccessDenial`, dipanggil dari `bootstrap/app.php`). Galat bisnis 403 lewat
+  `ApiException::forbidden()` (misalnya `ACCOUNT_INACTIVE`) dan `abort(403)` tidak dicatat.
+- Test: `actingAsRole(Role::Owner)` membuat user dengan peran tersebut lalu login, dan mengembalikan `User`.
+  Dataset matriks akses (`tests/Datasets/Roles.php`): `all_roles`, `all_roles_except_owner`,
+  `all_roles_except_owner_admin`, atau `->with(rolesExcept(Role::Owner, Role::Admin))` untuk kombinasi lain.
+
+```php
+it('menolak role selain owner', function (Role $role) {
+    actingAsRole($role);
+    $this->withHeaders(spaHeaders())->getJson('/api/v1/...')->assertForbidden();
+})->with('all_roles_except_owner');
+```
