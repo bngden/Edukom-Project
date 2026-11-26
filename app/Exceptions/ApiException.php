@@ -38,9 +38,9 @@ class ApiException extends RuntimeException
     /**
      * @param  array<string, list<string>>  $errors
      */
-    public static function conflict(string $message, array $errors = []): self
+    public static function conflict(string $message, array $errors = [], string $code = 'CONFLICT'): self
     {
-        return new self($message, 'CONFLICT', 409, $errors);
+        return new self($message, $code, 409, $errors);
     }
 
     /**
