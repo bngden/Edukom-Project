@@ -60,7 +60,9 @@ Desain Stitch hanya acuan tampilan, bukan acuan aturan bisnis.
 | Database test | Memakai DB dari `.env` (`db_edukom`, MariaDB 11.8 remote). `RefreshDatabase` = `migrate:fresh`, isi DB terhapus tiap test. Tidak ada DB test terpisah. |
 | Format kode | `./vendor/bin/pint --test` (cek), `./vendor/bin/pint` (rapikan) |
 | Tampilan web | `npm install` → `npm run build` (atau `npm run dev`) → `php artisan serve` → `/login`. Desain: skill `.claude/skills/frontend-design` |
-| Dokumentasi API | `php artisan scribe:generate` → `/docs` |
+| Dokumentasi API | `php artisan scribe:generate` → `/docs`; ringkasan endpoint Owner: `docs/API_OWNER.md` |
+| Data demo (hanya local) | `php artisan db:seed --class=DemoSeeder` (setelah `db:seed`) |
+| Masa simpan | `php artisan edukom:purge-retention [--dry-run]` (terjadwal 02.00 WIB; butuh `schedule:run` tiap menit) |
 | Peta kode (graphify) | `python -m graphify query "<pertanyaan>"`; setelah mengubah kode: `python -m graphify update .` |
 
 Catatan:
@@ -102,6 +104,12 @@ it('menolak role selain owner', function (Role $role) {
 - Tabel `audit_logs` append-only: model melempar exception saat update/delete, dan trigger DB menolak
   UPDATE/DELETE. Penghapusan hanya lewat `php artisan edukom:purge-audit --before=YYYY-MM-DD`.
 - Sudah tercatat otomatis: `access.denied` (setiap 403 otorisasi), `auth.account_locked`, `audit.purged`.
+- `subject_type` memakai alias morph map (`AppServiceProvider`): `policy_parameter`, `honor_component`,
+  `leave_rejection_reason`, `retention_run`, `payroll_period`, dst. Model baru yang menjadi subjek audit wajib
+  ditambahkan ke morph map (`User` sengaja tidak).
+- Audit versi (`VersionTimeline`) memakai `versionSubject()`: versi milik objek lain mencatat **objek induknya**
+  (versi parameter → parameter, tarif/set tingkatan → komponen honor), agar `GET /audit-logs?subject_type=&subject_id=`
+  memuat seluruh riwayat objek itu.
 - API: `GET /api/v1/audit-logs` (owner, admin), filter `subject_type`, `subject_id`, `actor_id`, `action`,
   `date_from`, `date_to` (YYYY-MM-DD), 25 per halaman, terbaru dulu.
 
@@ -114,6 +122,30 @@ it('menolak role selain owner', function (Role $role) {
 - Kode event ditulis di task yang membuat pemicunya. Jangan memuat data kesehatan atau data pribadi yang tidak perlu.
 - API (semua peran login, hanya milik sendiri; milik user lain → 404): `GET /api/v1/notifications?status=unread|read|all`
   (20 per halaman), `GET /notifications/unread-count`, `POST /notifications/{id}/read`, `POST /notifications/read-all`.
+
+## Data referensi (alasan baku)
+
+- Alasan penolakan izin/calon pengganti: `LeaveRejectionReason` (dikelola Owner; Admin hanya memilih yang `is_active`).
+  API `GET /api/v1/leave-rejection-reasons` (owner: `status=active|inactive|all`, `search`; admin: selalu aktif saja).
+- Model referensi yang boleh dihapus hanya bila belum dipakai memakai `App\Domain\Reference\TracksUsage`
+  (`isUsed()`, `usageCount()`), dihitung oleh `ReferenceUsage::countsFor()` dari registry `config('edukom.reference_usage')`.
+- **Modul pemakai wajib:** (1) mendaftarkan `[tabel, kolom_fk]`-nya di `edukom.reference_usage`, dan (2) menyimpan
+  **salinan nama alasan** saat dipakai, agar perubahan nama atau penonaktifan tidak mengubah data lama.
+- Hapus alasan yang sudah dipakai → 409 `REFERENCE_IN_USE`.
+
+## Masa simpan data
+
+- Masa simpan per jenis (`RetentionCatalog`: `attendance_evidence`, `leave_attachment`, `handover_photo`,
+  `honorarium_slip`, `audit_log`) adalah parameter kebijakan grup `retention` (`retention_<jenis>_months`); diubah lewat
+  `POST /api/v1/policy-parameters/{key}/versions`.
+- `php artisan edukom:purge-retention [--dry-run]` (terjadwal harian 02.00 WIB di `routes/console.php`). Berkas yang lebih
+  tua dari batas dihapus dan kolom berkasnya dikosongkan; **baris data tidak dihapus**. `audit_log` dihapus lewat
+  `AuditPurger` (satu-satunya jalur hapus riwayat). Hasil di `retention_runs`, audit `retention.purged`, notifikasi Owner.
+- **Modul yang menyimpan berkas bukti/lampiran/foto/slip wajib** mendaftarkan `[Model::class, kolom_tanggal, kolom_berkas]`
+  di `config('edukom.retention_targets')` (satu path per baris, disk bawaan).
+- Data induk yang sudah dipakai (sekolah, tentor, program, perangkat) tidak boleh punya endpoint hapus bebas: pakai
+  status nonaktif, dan bila hapus diizinkan task, wajib cek `TracksUsage::isUsed()` (pola T1.4).
+- API (owner): `GET /api/v1/retention`, `GET /retention-runs`, `POST /retention-runs/dry-run`.
 
 ## Data berversi
 

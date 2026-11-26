@@ -21,6 +21,8 @@
     --color-danger-bg: #fdecec;
     --color-success: #1f9d63;
     --color-success-bg: #e8f6ef;
+    --color-warning: #a9740a;
+    --color-warning-bg: #fff6e0;
     --color-nav-text: rgb(255 255 255 / 0.75);
     --color-nav-active: rgb(255 255 255 / 0.14);
 
@@ -58,5 +60,114 @@
         *::after {
             transition: none !important;
         }
+    }
+}
+
+/*
+ * Menu sidebar Owner. Saat hover/fokus, latar di sebelah kanan sidebar masuk dari tepi kanan membentuk tab
+ * dengan dua lengkung cekung (atas dan bawah) yang "memakan" biru sidebar. Menu aktif memakai bentuk yang sama.
+ */
+@layer components {
+    .nav-item {
+        --tab: var(--color-canvas);
+        --curve: 14px;
+        --ease: cubic-bezier(0.22, 0.8, 0.3, 1);
+        position: relative;
+        isolation: isolate;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        height: 40px;
+        padding-inline: 12px;
+        border-radius: 14px 0 0 14px;
+        color: var(--color-nav-text);
+        font-weight: 500;
+        transition: color 200ms var(--ease);
+    }
+
+    .nav-item::before,
+    .nav-item::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+        clip-path: inset(0 0 0 100%);
+        transition: clip-path 260ms var(--ease);
+    }
+
+    .nav-item::before {
+        inset: 0;
+        border-radius: inherit;
+        background: var(--tab);
+    }
+
+    .nav-item::after {
+        top: calc(var(--curve) * -1);
+        bottom: calc(var(--curve) * -1);
+        right: 0;
+        width: var(--curve);
+        background:
+            radial-gradient(circle at 0 0, transparent calc(var(--curve) - 0.5px), var(--tab) var(--curve)) top / var(--curve) var(--curve) no-repeat,
+            radial-gradient(circle at 0 100%, transparent calc(var(--curve) - 0.5px), var(--tab) var(--curve)) bottom / var(--curve) var(--curve) no-repeat;
+        transition-delay: 40ms;
+    }
+
+    a.nav-item:hover,
+    a.nav-item:focus-visible,
+    .nav-item[aria-current='page'] {
+        color: var(--color-royal);
+    }
+
+    a.nav-item:hover::before,
+    a.nav-item:hover::after,
+    a.nav-item:focus-visible::before,
+    a.nav-item:focus-visible::after,
+    .nav-item[aria-current='page']::before,
+    .nav-item[aria-current='page']::after {
+        clip-path: inset(0 0 0 0);
+    }
+
+    .nav-item[aria-current='page'] {
+        font-weight: 600;
+    }
+
+    a.nav-item:focus-visible {
+        outline: 2px solid var(--color-royal);
+        outline-offset: -4px;
+    }
+
+    .nav-item[aria-disabled='true'] {
+        color: rgb(255 255 255 / 0.4);
+        cursor: default;
+    }
+}
+
+@layer components {
+    .field {
+        @apply h-11 w-full rounded-control border border-line bg-white px-3 text-body transition-colors focus:border-royal focus:outline-none aria-invalid:border-danger;
+    }
+
+    textarea.field {
+        @apply h-auto min-h-20 py-2.5;
+    }
+
+    .btn {
+        @apply inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-control px-4 font-medium whitespace-nowrap transition-colors disabled:opacity-50;
+    }
+
+    .btn-primary {
+        @apply bg-royal text-white hover:bg-royal-700;
+    }
+
+    .btn-secondary {
+        @apply border border-line bg-white text-ink hover:bg-quiet;
+    }
+
+    .btn-danger {
+        @apply border border-danger/40 bg-white text-danger hover:bg-danger-bg;
+    }
+
+    .link {
+        @apply font-medium text-royal hover:text-royal-700;
     }
 }

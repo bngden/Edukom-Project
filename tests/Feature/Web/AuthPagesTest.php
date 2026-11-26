@@ -31,10 +31,11 @@ it('masuk dengan kredensial benar lalu menuju beranda Owner', function () {
 
     $this->assertAuthenticatedAs($this->owner, 'web');
 
-    $this->get('/beranda')
+    $this->get('/beranda')->assertRedirect('/owner');
+    $this->get('/owner')
         ->assertOk()
         ->assertSee('Hendra Wijaya')
-        ->assertSee('Belum ada modul Owner yang aktif');
+        ->assertSee('Perlu dikonfigurasi');
 });
 
 it('menampilkan pesan bila email atau kata sandi salah', function () {

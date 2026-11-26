@@ -71,6 +71,16 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->onlyInput('email');
         });
 
+        // Halaman web: galat bisnis (409, 422, 423) kembali ke form sebelumnya sebagai pesan galat.
+        $exceptions->render(function (ApiException $e, Request $request) use ($isApi) {
+            if ($isApi($request) || $request->isMethod('GET')) {
+                return null;
+            }
+
+            // Form dengan error bag sendiri mengirim field tersembunyi _bag (sama dengan $errorBag FormRequest-nya).
+            return back()->withInput()->withErrors($e->errors ?: ['general' => $e->getMessage()], (string) $request->input('_bag', 'default'));
+        });
+
         $exceptions->render(function (Throwable $e, Request $request) use ($isApi, $apiError) {
             if (! $isApi($request)) {
                 return null;

@@ -15,9 +15,10 @@ Diperbarui oleh agent di akhir setiap task. Manusia memeriksa dan mengubah statu
 | T0.5 | Periode penggajian (minimal) dan pola data berversi | 🟡 | feat/t0-5-periode-versi | 2026-11-25 | Menunggu review; 10 test baru lulus |
 | T1.1 | Parameter kebijakan berversi (OW-02, AD-27) | ⬜ | | | |
 | T1.2 | Komponen honorarium dan tarif berversi (OW-01, AD-27) | ⬜ | | | |
-| T1.3 | Tingkatan jarak uang transportasi (OW-01.4) | ⬜ | | | |
-| T1.4 | Daftar alasan penolakan izin (OW-03) | ⬜ | | | |
-| T1.5 | Konsolidasi Fase 1: akses Admin, riwayat, dokumentasi, data demo | ⬜ | | | |
+| T1.3 | Tingkatan jarak uang transportasi (OW-01.4) | 🟡 | feat/t1-1-parameter-kebijakan | 2026-11-26 | API saja (UI ditunda); 28 test baru lulus; belum di-commit |
+| T1.4 | Daftar alasan penolakan izin (OW-03) | 🟡 | feat/t1-1-parameter-kebijakan | 2026-11-26 | API saja (UI ditunda); test ditulis, **belum dijalankan**; belum di-commit |
+| T1.5 | Masa simpan data dan pembersihan otomatis (OW-15) | 🟡 | feat/t1-1-parameter-kebijakan | 2026-11-26 | API saja (UI ditunda); test ditulis, **belum dijalankan**; belum di-commit |
+| T1.6 | Beranda dan konsolidasi Fase 1 (dulu T1.5 lama) | 🟡 | feat/t1-1-parameter-kebijakan | 2026-11-26 | API saja (Beranda Blade & E2E ditunda); test ditulis, **belum dijalankan**; belum di-commit |
 | T2.0 | (Manual) Perbaiki dan lengkapi desain di Stitch | ⬜ | | | |
 | T2.1 | Setup frontend, koneksi Stitch MCP, dan design tokens | ⬜ | | | |
 | T2.2 | Login, layout Owner, menu, Beranda, notifikasi | ⬜ | | | |
@@ -29,6 +30,95 @@ Diperbarui oleh agent di akhir setiap task. Manusia memeriksa dan mengubah statu
 ## Log per task
 
 <!-- Salin templat di bawah untuk setiap task yang selesai. Terbaru di atas. -->
+
+### Halaman Blade Owner — Tahap 1: layout, Beranda, Riwayat Perubahan (2026-11-26)
+- **Branch:** feat/t1-1-parameter-kebijakan (belum di-commit).
+- **Ringkasan:** layout Owner (`components/layouts/owner.blade.php`) dengan sidebar urutan Stitch (Utama, Persetujuan, Pemantauan, Kebijakan + Masa Simpan Data, Pengaturan: Riwayat Perubahan), label grup sentence case, menu tanpa halaman tampil redup; animasi tab cekung saat hover/fokus/aktif (`.nav-item` di `app.css`, warna canvas, mati bila reduced motion); top bar dengan panel notifikasi dan menu akun; drawer di mobile, rail ikon di tablet. Halaman `/owner` (data `OwnerOverview`) dan `/owner/pengaturan/riwayat` (`AuditLogQuery` dipakai bersama API, label `AuditLabels`). Owner di `/beranda` dialihkan ke `/owner`. Rute web notifikasi: `POST /notifikasi/{id}/baca` (hanya tautan internal), `POST /notifikasi/baca-semua`. Komponen `x-chip`; 19 ikon Material Symbols.
+- **Perbedaan disengaja dari Stitch:** subjudul/keterangan, kolom cari, tombol bantuan, dropdown periode, Ekspor, label HURUF BESAR, dan kartu berbayang dihapus; tombol "Tinjau Persetujuan" disembunyikan sampai modul persetujuan ada.
+- **Test:** `tests/Feature/Web/OwnerPagesTest.php` (ditulis, belum dijalankan).
+- **Ditunda (disetujui user):** grafik di Beranda menunggu data nyata dari modul Pembelajaran/Aset/Honorarium (Beranda final, T3.5).
+
+### Halaman Blade Owner — Tahap 2–3: Parameter Kebijakan, Komponen Honor (2026-11-26)
+- **Parameter:** `/owner/kebijakan/parameter` (per grup, tanpa grup Masa Simpan) dan `/owner/kebijakan/parameter/{key}` (nilai berlaku, perubahan terjadwal + batalkan, form nilai baru dengan input per tipe di `_value-input.blade.php`, riwayat nilai).
+- **Komponen Honor:** `/owner/kebijakan/komponen-honor` (daftar + dialog Tambah) dan `/{id}` (ubah besaran atau editor tingkatan jarak dengan validasi langsung + pratinjau ringkasan, info komponen, nonaktifkan/batalkan, riwayat).
+- **Teknis:** controller web memakai FormRequest API lewat subkelas di `app/Http/Requests/Web/Owner` (error bag per form + `CastsFormNumbers` karena form mengirim angka sebagai teks; batas km boleh koma); `ApiException` di request web non-GET kembali ke halaman sebelumnya pada bag `_bag`; kelas `.field`/`.btn*`/`.link` di `app.css`; `App\Support\Format::rupiah`; `VersionStatus::tone()`.
+- **Test:** `tests/Feature/Web/OwnerPolicyPagesTest.php` (ditulis, belum dijalankan).
+
+### Halaman Blade Owner — Tahap 4: Alasan Penolakan, Masa Simpan Data (2026-11-26)
+- **Alasan Penolakan** (`/owner/kebijakan/alasan-penolakan`): penyaring Semua/Aktif/Nonaktif + cari, dialog Tambah/Ubah, urutan naik/turun (hanya saat daftar lengkap; `LeaveRejectionReasons::move`), Nonaktifkan/Aktifkan, Hapus dengan dialog konfirmasi (tombol nonaktif + tooltip bila sudah dipakai), jumlah pemakaian per alasan.
+- **Masa Simpan Data** (`/owner/kebijakan/masa-simpan`): 5 jenis data dengan nilai berlaku/terjadwal; "Ubah" membuka halaman parameter yang sama (tautan kembali mengarah ke Masa Simpan); pembersihan terakhir dengan ringkasan per jenis; "Jalankan uji" (dry-run sinkron) menampilkan perkiraan.
+- **Perbedaan disengaja dari task:** urutan memakai tombol naik/turun (aksesibel keyboard), bukan drag & drop; banner "tidak dapat dihapus" diganti tooltip pada tombol hapus yang nonaktif.
+- **Test:** tambahan di `tests/Feature/Web/OwnerPolicyPagesTest.php` (ditulis, belum dijalankan).
+
+### T1.6 — Beranda dan konsolidasi Fase 1 (2026-11-26)
+- **Branch:** feat/t1-1-parameter-kebijakan (belum di-commit).
+- **Acuan:** `docs/tasks/T1.6-beranda-konsolidasi-fase1.md` (SRS v3) digabung dengan T1.5 Konsolidasi versi API di `HEAD`. Halaman Beranda Livewire, uji browser E2E, cek responsif, dan axe ditunda ke tahap halaman Blade.
+- **Ringkasan perubahan:** `GET /api/v1/owner/overview` (`App\Domain\Owner\OwnerOverview`); alias `subject_type` lewat `Relation::morphMap` (tanpa enforce, tanpa `User`); hook `versionSubject()` sehingga audit versi parameter/tarif/set tingkatan dicatat dengan subjek induknya (parameter / komponen honor); matriks akses 36 endpoint × 5 peran × tamu + test pengaman rute baru; `DemoSeeder` (local, manual, idempoten); `docs/API_OWNER.md`; CLAUDE.md (alias riwayat, perintah demo & masa simpan).
+- **File utama:** `app/Domain/Owner/OwnerOverview.php`; `OwnerOverviewController`; `app/Providers/AppServiceProvider.php`; `app/Domain/Versioning/{HasEffectiveDating,VersionTimeline}.php`; `app/Models/{PolicyParameterVersion,HonorComponentRate,TransportTierSet}.php`; `database/seeders/DemoSeeder.php`; `docs/API_OWNER.md`; test `tests/Feature/Access/OwnerPhase1AccessTest.php`, `tests/Feature/Owner/OwnerOverviewTest.php`, `tests/Feature/Audit/ObjectHistoryTest.php`.
+- **Endpoint baru:** `GET /api/v1/owner/overview` (owner).
+- **Test:** ditulis, belum dijalankan (dijalankan user bersama T1.2–T1.5). Matriks akses ±37 test; perkiraan 15–30 menit di DB remote.
+- **Asumsi yang diambil (disetujui user):**
+  - Audit versi memakai subjek induk; alias `retention_policy` dan `admin_account` dari task tidak dibuat (masa simpan = parameter; modul akun Admin belum ada).
+  - Matriks: peran yang boleh hanya diperiksa "bukan 401/403" (bisa 404/409/422 karena payload kosong).
+  - `DemoSeeder` tidak ikut `db:seed`; dijalankan manual. Periode bulan lalu ditutup terakhir agar versi demo tidak tertolak.
+  - `last_retention_run` di Beranda hanya pembersihan sungguhan (bukan uji).
+- **Perlu dikonfirmasi:**
+  - Data audit lama di DB dev yang memakai nama kelas penuh (`App\Models\...`) tidak ikut alias; DB test selalu bersih. Bila DB dev perlu konsisten, kosongkan dengan `migrate:fresh`.
+  - `scribe:generate` belum dijalankan ulang: response call GET butuh tabel T1.2–T1.5 sudah di-migrate.
+  - Entri log T1.1 dan T1.2 di file ini belum ditulis.
+
+### T1.5 — Masa simpan data dan pembersihan otomatis (2026-11-26)
+- **Branch:** feat/t1-1-parameter-kebijakan (belum di-commit; di-commit bersama T1.1–T1.4 setelah diuji).
+- **Acuan:** `docs/tasks/T1.5-masa-simpan.md` (set SRS v3, OW-15), versi API; disetujui user dikerjakan sebelum konsolidasi (T1.6). Halaman Livewire, tangkapan layar, dan uji browser ditunda.
+- **Ringkasan perubahan:** parameter `data_retention_months` (T1.1) diganti 5 parameter per jenis `retention_*_months` (nilai awal 6 bulan, 1–120), sehingga katalog jadi 36 parameter; `RetentionCatalog`; registry `edukom.retention_targets`; `RetentionPurger::run($dryRun)` (berkas dihapus + kolom dikosongkan, baris tetap; galat per jenis tidak menghentikan jenis lain); logika hapus audit dipindah ke `AuditPurger` dan dipakai bersama `edukom:purge-audit`; command `edukom:purge-retention [--dry-run]` terjadwal 02.00 WIB; tabel `retention_runs`; audit `retention.purged` (pelaku Sistem) + notifikasi `retention.purged` ke Owner; catatan "Masa simpan data" di CLAUDE.md.
+- **File/migration utama:** `2026_11_26_000005_create_retention_runs_table`; `app/Domain/Retention/{RetentionCatalog,RetentionPurger}.php`; `app/Domain/Audit/AuditPurger.php`; `app/Console/Commands/{PurgeRetention,PurgeAudit}.php`; `app/Models/RetentionRun.php`; `RetentionController`, `RetentionRunResource`; `routes/{api,console}.php`; `app/Domain/Policy/ParameterCatalog.php`; `config/edukom.php`; test `tests/database/migrations/2026_11_26_900001_create_test_evidence_files_table.php`, `tests/Fixtures/TestEvidenceFile.php`.
+- **Endpoint baru (owner):** `GET /api/v1/retention`, `GET /retention-runs` (25 per halaman), `POST /retention-runs/dry-run`. Ubah/batal masa simpan memakai endpoint parameter T1.1.
+- **Test:** `tests/Feature/Retention/RetentionTest.php` (ditulis, belum dijalankan); `PolicyParameterTest` disesuaikan 32 → 36.
+- **Asumsi yang diambil (disetujui user):**
+  - Masa simpan disimpan sebagai parameter kebijakan, bukan tabel `retention_policies` terpisah. Akibatnya tanggal berlaku tetap diperiksa terhadap periode penggajian tertutup (task menyebut tidak perlu); Admin dapat melihat nilainya lewat daftar parameter (read-only).
+  - Hanya berkas yang dihapus (kolom berkas dikosongkan); baris data tidak dihapus. `audit_log` dihapus barisnya.
+  - Dry-run dijalankan langsung (sinkron), bukan lewat job antrean.
+  - Batas = hari ini dikurangi N bulan (tanpa overflow akhir bulan); data dengan tanggal < batas dibersihkan.
+  - Jenis tanpa sumber terdaftar → status `skipped`; masa simpan belum dikonfigurasi → `skipped`.
+- **Perlu dikonfirmasi:**
+  - Kolom berkas diasumsikan satu path per baris. Bila modul nanti menyimpan beberapa berkas per baris (JSON), purger perlu diperluas.
+  - Scheduler butuh `php artisan schedule:run` tiap menit (cron/Task Scheduler) di server.
+- **Catatan untuk task berikutnya:** modul presensi, izin, serah terima, dan slip mendaftarkan sumber berkasnya di `edukom.retention_targets`.
+
+### T1.4 — Daftar alasan penolakan izin (2026-11-26)
+- **Branch:** feat/t1-1-parameter-kebijakan (belum di-commit; di-commit bersama T1.1–T1.3 setelah diuji).
+- **Acuan:** versi API `docs/tasks/T1.4-alasan-penolakan.md` di `HEAD` (aturan sama dengan versi SRS v3 di working tree). Halaman Livewire, `<livewire:shared.rejection-reason-select>`, tangkapan layar, dan uji browser ditunda ke tahap halaman Blade.
+- **Ringkasan perubahan:** tabel `leave_rejection_reasons`; model `LeaveRejectionReason implements TracksUsage`; `ReferenceUsage::countsFor()` (registry `edukom.reference_usage`, satu query per tabel terdaftar); `LeaveRejectionReasons::create/update/reorder/activate/deactivate/delete` (transaksi + audit `leave_rejection_reason.*`); `ApiException::conflict()` menerima kode galat opsional (`REFERENCE_IN_USE`); seeder contoh 4 alasan (hanya local); catatan "Data referensi" di CLAUDE.md.
+- **File/migration utama:** `2026_11_26_000004_create_leave_rejection_reasons_table`; `app/Domain/Reference/{TracksUsage,ReferenceUsage,LeaveRejectionReasons}.php`; `app/Models/LeaveRejectionReason.php`; `LeaveRejectionReasonController`; requests `{LeaveRejectionReasonIndex,StoreLeaveRejectionReason,UpdateLeaveRejectionReason,ReorderLeaveRejectionReasons}Request` + `LeaveRejectionReasonRules`; `LeaveRejectionReasonResource`; `LeaveRejectionReasonSeeder`; `config/edukom.php`; test `tests/database/migrations/2026_11_26_900000_create_test_reason_usages_table.php`.
+- **Endpoint baru:** `GET /api/v1/leave-rejection-reasons` (owner, admin); `POST /leave-rejection-reasons`, `PUT /leave-rejection-reasons/order`, `PATCH|DELETE /leave-rejection-reasons/{id}`, `POST /leave-rejection-reasons/{id}/deactivate|activate` (owner).
+- **Test:** `tests/Feature/Reference/LeaveRejectionReasonTest.php` (ditulis, belum dijalankan; dijalankan bersama T1.2–T1.3).
+- **Asumsi yang diambil:**
+  - `PUT /order` wajib memuat semua id alasan (aktif dan nonaktif) tepat satu kali; selain itu 422.
+  - Admin yang mengirim `status=all|inactive` tetap menerima alasan aktif saja (parameter diabaikan, bukan ditolak).
+  - Alasan belum pernah dipakai dihapus permanen (pengecualian dari aturan umum "data induk tidak dihapus", sesuai task); audit `deleted` menyimpan nama dan isinya.
+  - Nonaktifkan yang sudah nonaktif / aktifkan yang sudah aktif → 409. Status tidak dapat diubah lewat PATCH (422).
+  - Daftar tanpa paginasi (jumlah kecil), urut `sort_order` lalu `id`.
+- **Perlu dikonfirmasi:**
+  - Halaman Blade Alasan Penolakan belum ada.
+  - Daftar resmi alasan disusun Owner (Lampiran E no. 14); seeder hanya contoh untuk local.
+- **Catatan untuk task berikutnya:** modul izin (T2.5/AD-15) mendaftarkan `[tabel, kolom]` di `edukom.reference_usage`, menyimpan salinan nama alasan, dan hanya menerima alasan `is_active`.
+
+### T1.3 — Tingkatan jarak uang transportasi (2026-11-26)
+- **Branch:** feat/t1-1-parameter-kebijakan (belum di-commit; rencananya di-commit bersama T1.1 dan T1.2 setelah diuji, commit terpisah per task).
+- **Acuan:** `docs/tasks/T1.3-tingkatan-jarak.md` (OW-01.4, AC-OW-01.4), hanya bagian backend. Bagian Livewire/editor/tangkapan layar/uji browser ditunda ke tahap halaman Blade.
+- **Ringkasan perubahan:** tabel `transport_tier_sets` (berversi) + `transport_tiers`; model `TransportTierSet` (`HasEffectiveDating`, audit `transport_tier_set.*`) dan `TransportTier`; `TransportTierSets::add` (transaksi, 422 bila komponen bukan tingkatan jarak, 409 bila komponen nonaktif); `HonorRates::transportAmountFor/transportTiersOn/transportSummary/summarizeTiers/roundKm` (pembulatan half up 1 desimal dengan BCMath); hook `versionContent()` di `HasEffectiveDating` agar audit before/after memuat daftar tingkatan; seeder set awal `[≤10 km Rp10.000, >10 km Rp15.000]` mulai `EDUKOM_POLICY_BASE_DATE`; `HonorComponentResource` menampilkan `current_tier_set` dan `scheduled_tier_set` untuk komponen tingkatan jarak.
+- **File/migration utama:** `2026_11_26_000003_create_transport_tier_tables`; `app/Models/{TransportTierSet,TransportTier}.php`; `app/Domain/Honorarium/{TransportTierSets,HonorRates}.php`; `app/Domain/Versioning/{HasEffectiveDating,VersionTimeline}.php`; `app/Http/Requests/Api/V1/StoreTransportTierSetRequest.php`; `app/Http/Resources/V1/{TransportTierSetResource,HonorComponentResource}.php`; `HonorComponentController`; `routes/api.php`; `HonorComponentSeeder`.
+- **Endpoint baru:** `GET /api/v1/honor-components/{id}/tier-sets` (owner, admin; 50 versi terbaru); `POST /honor-components/{id}/tier-sets` (owner); `POST /honor-components/{id}/tier-sets/{tierSet}/cancel` (owner).
+- **Test:** 28 test baru lulus (`tests/Feature/Honorarium/TransportTierTest.php`).
+- **Asumsi yang diambil:**
+  - Tingkatan terakhir wajib tanpa batas atas (`max_km` null) agar setiap jarak pasti punya tingkatan; maksimal 20 tingkatan; `max_km` > 0 dan ≤ 99999,9.
+  - Tingkatan pertama mencakup 0 km (`min_km_exclusive` 0,0 hanya penanda; pencarian memakai batas atas).
+  - Jarak negatif ke `transportAmountFor` melempar `InvalidArgumentException` (galat program, bukan input pengguna).
+  - Format ringkasan tingkatan tengah: `> 10–20 km: Rp12.000`; satu tingkatan saja: `Semua jarak: Rp…`.
+- **Perlu dikonfirmasi:**
+  - Halaman Blade (kartu Uang Transportasi + editor tingkatan) belum ada; dikerjakan bersama halaman Komponen Honor.
+  - Entri log T1.1 dan T1.2 di file ini belum ditulis.
+- **Catatan untuk task berikutnya:** penggajian (AD-23) memakai `HonorRates::transportAmountFor($jarakKm, $tanggalKunjungan)`; jarak AD-36 cukup dikirim apa adanya karena pembulatan dilakukan di service.
 
 ### T0.5 — Periode penggajian dan data berversi (2026-11-25)
 - **Branch:** feat/t0-5-periode-versi (dari feat/t0-4-notifikasi)
