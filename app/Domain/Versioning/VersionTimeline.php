@@ -5,10 +5,10 @@ namespace App\Domain\Versioning;
 use App\Domain\Audit\Audit;
 use App\Domain\Payroll\PeriodGuard;
 use App\Exceptions\ApiException;
+use App\Support\Format;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class VersionTimeline
 {
@@ -34,17 +34,18 @@ class VersionTimeline
                 ->first();
 
             if ($previous !== null && $from->lte($previous->effective_from)) {
-                $message = 'Tanggal berlaku harus setelah '.$previous->effective_from->locale('id')->translatedFormat('j F Y')
+                $message = 'Tanggal berlaku harus setelah '.Format::date($previous->effective_from)
                     .' (tanggal berlaku versi terakhir).';
 
                 throw ApiException::conflict($message, ['effective_from' => [$message]]);
             }
 
+            $before = $previous?->versionContent();
             $previous?->forceFill(['effective_to' => $from->subDay()])->save();
 
             $version->forceFill(['reason' => $reason, 'created_by' => Auth::id()])->save();
 
-            Audit::record(self::action($version, 'version_created'), $version, null, $version->attributesToArray(), $reason);
+            Audit::record(self::action($version, 'version_created'), self::subject($version), $before, $version->versionContent(), $reason);
 
             return $version;
         });
@@ -85,7 +86,7 @@ class VersionTimeline
 
             $latest->get(1)?->forceFill(['effective_to' => null])->save();
 
-            Audit::record(self::action($version, 'version_cancelled'), $version, ['cancelled_at' => null], [
+            Audit::record(self::action($version, 'version_cancelled'), self::subject($version), ['cancelled_at' => null], [
                 'cancelled_at' => $version->cancelled_at->toIso8601String(),
                 'effective_from' => $version->effective_from->toDateString(),
             ], $reason);
@@ -94,6 +95,16 @@ class VersionTimeline
 
     private static function action(Model $version, string $event): string
     {
-        return Str::snake(class_basename($version)).'.'.$event;
+        return $version->versionAuditName().'.'.$event;
+    }
+
+    /**
+     * @return array{type: string, id: mixed, label: string|null}
+     */
+    private static function subject(Model $version): array
+    {
+        $subject = $version->versionSubject();
+
+        return ['type' => $subject->getMorphClass(), 'id' => $subject->getKey(), 'label' => $version->versionLabel()];
     }
 }

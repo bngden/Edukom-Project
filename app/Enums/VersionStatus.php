@@ -9,6 +9,18 @@ enum VersionStatus: string
     case Ended = 'ended';
     case Cancelled = 'cancelled';
 
+    /**
+     * Warna chip status di halaman web (komponen x-chip).
+     */
+    public function tone(): string
+    {
+        return match ($this) {
+            self::Scheduled => 'info',
+            self::Active => 'success',
+            self::Ended, self::Cancelled => 'neutral',
+        };
+    }
+
     public function label(): string
     {
         return match ($this) {
