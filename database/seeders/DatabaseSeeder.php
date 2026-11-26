@@ -13,11 +13,13 @@ class DatabaseSeeder extends Seeder
     use WithoutModelEvents;
 
     /**
-     * Akun bawaan Owner dan Admin. Hanya untuk APP_ENV=local;
-     * kata sandi dari SEED_OWNER_PASSWORD / SEED_ADMIN_PASSWORD.
+     * Parameter kebijakan dan komponen honor (semua environment); akun bawaan Owner/Admin dan contoh alasan
+     * penolakan (hanya APP_ENV=local; kata sandi dari SEED_OWNER_PASSWORD / SEED_ADMIN_PASSWORD).
      */
     public function run(): void
     {
+        $this->call([PolicyParameterSeeder::class, HonorComponentSeeder::class]);
+
         if (! app()->environment('local')) {
             $this->command?->warn('DatabaseSeeder dilewati: hanya berjalan di APP_ENV=local.');
 
@@ -44,5 +46,7 @@ class DatabaseSeeder extends Seeder
                 ],
             );
         }
+
+        $this->call(LeaveRejectionReasonSeeder::class);
     }
 }
