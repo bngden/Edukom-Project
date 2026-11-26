@@ -3,10 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Domain\Audit\Audit;
-use App\Models\AuditLog;
+use App\Domain\Audit\AuditPurger;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class PurgeAudit extends Command
@@ -28,19 +27,7 @@ class PurgeAudit extends Command
         }
 
         $before = Carbon::parse($validator->validated()['before']);
-        $deleted = 0;
-
-        DB::statement('SET @edukom_audit_purge = 1');
-
-        try {
-            // Bulk delete tidak memicu event model, jadi penjaga `deleting` di AuditLog tidak terpanggil.
-            do {
-                $batch = AuditLog::query()->where('occurred_at', '<', $before)->limit(1000)->delete();
-                $deleted += $batch;
-            } while ($batch === 1000);
-        } finally {
-            DB::statement('SET @edukom_audit_purge = NULL');
-        }
+        $deleted = AuditPurger::purgeBefore($before);
 
         Audit::record('audit.purged', [
             'type' => 'audit_log',
